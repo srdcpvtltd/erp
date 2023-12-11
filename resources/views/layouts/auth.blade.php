@@ -119,16 +119,7 @@
 
 
                         </div>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarlogin">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarlogin">
-                            <ul class="navbar-nav align-items-center ms-auto mb-2 mb-lg-0">
-                                @include('landingpage::layouts.buttons')
-                                @yield('language-bar')
-                            </ul>
-                        </div>
+                 
                     </div>
                 </nav>
             </header>
@@ -205,7 +196,7 @@
                             class="img-fluid"
                         />
                         <h3 class="text-white mb-4 mt-5">
-                            ‚ÄúAttention is the new currency‚Äù
+                            ìAttention is the new currencyî
                         </h3>
                         <p class="text-white">
                             The more effortless the writing looks, the more effort the

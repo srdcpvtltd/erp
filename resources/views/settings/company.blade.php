@@ -593,83 +593,11 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-3">
-                                                <div class="form-group">
-                                                    <label class="text-dark mb-1 mt-3" for="SITE_RTL">{{ __('Enable RTL') }}</label>
-                                                    <div class="">
-                                                        <input type="checkbox" name="SITE_RTL" id="SITE_RTL" data-toggle="switchbutton" {{$settings['SITE_RTL'] == 'on' ? 'checked="checked"' : '' }} data-onstyle="primary">
-                                                        <label class="form-check-label" for="SITE_RTL"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div class="form-group">
-                                                    <label class="text-dark mb-1 mt-3" for="display_landing_page">{{ __('Enable Landing Page') }}</label>
-                                                    <div class="">
-                                                        <input type="checkbox" name="display_landing_page" id="display_landing_page" data-toggle="switchbutton" {{$settings['display_landing_page'] == 'on' ? 'checked="checked"' : '' }} data-onstyle="primary">
-                                                        <label class="form-check-label" for="display_landing_page"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
-                                <h4 class="small-title">{{__('Theme Customizer')}}</h4>
-                                <div class="setting-card setting-logo-box p-3">
-                                    <div class="row">
-                                        <div class="col-lg-4 col-xl-4 col-md-4">
-                                            <h6 class="mt-2 ">
-                                                <i data-feather="credit-card" class="me-2"></i>{{ __('Primary color settings') }}
-                                            </h6>
-
-                                            <hr class="my-2 " />
-                                            <div class="theme-color themes-color">
-                                                <a href="#!" class="themes-color-change {{ $settings['color'] == 'theme-1' ? 'active_color' : '' }}" data-value="theme-1"></a>
-                                                <input type="radio" class="theme_color d-none" name="color" value="theme-1"{{ $settings['color'] == 'theme-1' ? 'checked' : '' }}>
-                                                <a href="#!" class="themes-color-change {{ $settings['color'] == 'theme-2' ? 'active_color' : '' }}" data-value="theme-2"></a>
-                                                <input type="radio" class="theme_color d-none" name="color" value="theme-2"{{ $settings['color'] == 'theme-2' ? 'checked' : '' }}>
-                                                <a href="#!" class="themes-color-change {{ $settings['color'] == 'theme-3' ? 'active_color' : '' }}" data-value="theme-3"></a>
-                                                <input type="radio" class="theme_color d-none" name="color" value="theme-3"{{ $settings['color'] == 'theme-3' ? 'checked' : '' }}>
-                                                <a href="#!" class="themes-color-change {{ $settings['color'] == 'theme-4' ? 'active_color' : '' }}" data-value="theme-4"></a>
-                                                <input type="radio" class="theme_color d-none" name="color" value="theme-4"{{ $settings['color'] == 'theme-4' ? 'checked' : '' }}>
-                                                <a href="#!" class="themes-color-change {{ $settings['color'] == 'theme-5' ? 'active_color' : '' }}" data-value="theme-5"></a>
-                                                <input type="radio" class="theme_color d-none" name="color" value="theme-5"{{ $settings['color'] == 'theme-5' ? 'checked' : '' }}>
-                                                <br>
-                                                <a href="#!" class="themes-color-change {{ $settings['color'] == 'theme-6' ? 'active_color' : '' }}" data-value="theme-6"></a>
-                                                <input type="radio" class="theme_color d-none" name="color" value="theme-6"{{ $settings['color'] == 'theme-6' ? 'checked' : '' }}>
-                                                <a href="#!" class="themes-color-change {{ $settings['color'] == 'theme-7' ? 'active_color' : '' }}" data-value="theme-7"></a>
-                                                <input type="radio" class="theme_color d-none" name="color" value="theme-7"{{ $settings['color'] == 'theme-7' ? 'checked' : '' }}>
-                                                <a href="#!" class="themes-color-change {{ $settings['color'] == 'theme-8' ? 'active_color' : '' }}" data-value="theme-8"></a>
-                                                <input type="radio" class="theme_color d-none" name="color" value="theme-8"{{ $settings['color'] == 'theme-8' ? 'checked' : '' }}>
-                                                <a href="#!" class="themes-color-change {{ $settings['color'] == 'theme-9' ? 'active_color' : '' }}" data-value="theme-9"></a>
-                                                <input type="radio" class="theme_color d-none" name="color" value="theme-9"{{ $settings['color'] == 'theme-9' ? 'checked' : '' }}>
-                                                <a href="#!" class="themes-color-change {{ $settings['color'] == 'theme-10' ? 'active_color' : '' }}" data-value="theme-10"></a>
-                                                <input type="radio" class="theme_color d-none" name="color" value="theme-10"{{ $settings['color'] == 'theme-10' ? 'checked' : '' }}>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-4 col-md-4">
-                                            <h6 class="mt-2 ">
-                                                <i data-feather="layout" class="me-2"></i>{{__('Sidebar settings')}}
-                                            </h6>
-                                            <hr class="my-2 " />
-                                            <div class="form-check form-switch">
-                                                <input type="checkbox" class="form-check-input" id="cust-theme-bg" name="cust_theme_bg" {{ !empty($settings['cust_theme_bg']) && $settings['cust_theme_bg'] == 'on' ? 'checked' : '' }}/>
-                                                <label class="form-check-label f-w-600 pl-1" for="cust-theme-bg"
-                                                >{{__('Transparent layout')}}</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-xl-4 col-md-4">
-                                            <h6 class="mt-2 ">
-                                                <i data-feather="sun" class="me-2"></i>{{__('Layout settings')}}
-                                            </h6>
-                                            <hr class="my-2 " />
-                                            <div class="form-check form-switch mt-2">
-                                                <input type="checkbox" class="form-check-input" id="cust-darklayout" name="cust_darklayout"{{ !empty($settings['cust_darklayout']) && $settings['cust_darklayout'] == 'on' ? 'checked' : '' }} />
-                                                <label class="form-check-label f-w-600 pl-1" for="cust-darklayout">{{ __('Dark Layout') }}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                             </div>
                         </div>
                         <div class="card-footer text-end">

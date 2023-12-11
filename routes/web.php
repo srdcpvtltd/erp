@@ -67,6 +67,12 @@ use App\Http\Controllers\LeadStageController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\LoanOptionController;
+use App\Http\Controllers\Location\BlockController;
+use App\Http\Controllers\Location\CountryController;
+use App\Http\Controllers\Location\DistrictController;
+use App\Http\Controllers\Location\GramPanchyatController;
+use App\Http\Controllers\Location\StateController;
+use App\Http\Controllers\Location\VillageController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MercadoPaymentController;
 use App\Http\Controllers\MolliePaymentController;
@@ -1522,5 +1528,23 @@ Route::group(
         Route::resource('expense', ExpenseController::class);
         Route::get('expense/create/{cid}', [ExpenseController::class, 'create'])->name('expense.create');
 
+    }
+);
+Route::group(
+    [
+        'prefix' => 'location',
+        'as'=>'location.',
+        'middleware' => [
+            'auth',
+            'XSS',
+            'revalidate',
+        ],
+    ], function () {
+        Route::resource('country',CountryController::class);   
+        Route::resource('state',StateController::class);   
+        Route::resource('district',DistrictController::class);  
+        Route::resource('block',BlockController::class);   
+        Route::resource('gram_panchyat',GramPanchyatController::class);
+        Route::resource('village',VillageController::class);
     }
 );

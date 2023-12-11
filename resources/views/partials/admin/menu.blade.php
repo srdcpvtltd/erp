@@ -924,6 +924,23 @@
 
                             @include('landingpage::menu.landingpage')
 
+                            <li class="dash-item dash-hasmenu {{ Request::is('location*')?' active dash-trigger':''}}">
+                                <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-location"></i></span><span class="dash-mtext">{{__('Location')}}</span><span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
+                                <ul class="dash-submenu {{Request::is('location*')?'show':''}}">
+                                    <li class="dash-item {{ (Request::route()->getName() == 'location.country.index') ? ' active' : '' }}"><a class="dash-link" href="{{ route('location.country.index') }}">{{__('Country')}}</a>
+                                    </li>
+                                    <li class="dash-item {{ (Request::route()->getName() == 'location.state.index') ? ' active' : '' }}"><a class="dash-link" href="{{ route('location.state.index') }}">{{__('State')}}</a>
+                                    </li>
+                                    <li class="dash-item {{ (Request::route()->getName() == 'location.district.index') ? ' active' : '' }}"><a class="dash-link" href="{{ route('location.district.index') }}">{{__('District')}}</a>
+                                    </li>
+                                    <li class="dash-item {{ (Request::route()->getName() == 'location.block.index') ? ' active' : '' }}"><a class="dash-link" href="{{ route('location.block.index') }}">{{__('Block')}}</a>
+                                    </li>
+                                    <li class="dash-item {{ (Request::route()->getName() == 'location.gram_panchyat.index') ? ' active' : '' }}"><a class="dash-link" href="{{ route('location.gram_panchyat.index') }}">{{__('Gram Panchyat')}}</a>
+                                    </li>
+                                    <li class="dash-item {{ (Request::route()->getName() == 'location.village.index') ? ' active' : '' }}"><a class="dash-link" href="{{ route('location.village.index') }}">{{__('Village')}}</a>
+                                    </li>
+                                </ul>
+                            </li>
 
                         @endif
 

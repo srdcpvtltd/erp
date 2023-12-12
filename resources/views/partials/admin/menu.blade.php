@@ -198,11 +198,8 @@
                                     @if($show_dashboard == 1)
                                         @can('show pos dashboard')
                                         <li class="dash-item dash-hasmenu {{ ( Request::segment(1) == 'pos-dashboard'  || Request::segment(1) == 'reports-warehouse' || Request::segment(1) == 'reports-daily-purchase' || Request::segment(1) == 'reports-monthly-purchase' || Request::segment(1) == 'reports-daily-pos' || Request::segment(1) == 'reports-monthly-pos'||Request::segment(1) == 'reports-pos-vs-purchase') ? ' active dash-trigger' : ''}}">
-                                            <a class="dash-link" href="#">{{__('POS')}}<span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
+                                            <a class="dash-link" href="#">{{__('Inventory')}}<span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                                             <ul class="dash-submenu">
-                                                <li class="dash-item {{ (\Request::route()->getName()=='pos.dashboard') ? ' active' : '' }}">
-                                                    <a class="dash-link" href="{{route('pos.dashboard')}}">{{__(' Overview')}}</a>
-                                                </li>
                                                 <li class="dash-item dash-hasmenu {{ ( Request::segment(1) == 'reports-warehouse' || Request::segment(1) == 'reports-daily-purchase' || Request::segment(1) == 'reports-monthly-purchase' || Request::segment(1) == 'reports-daily-pos' || Request::segment(1) == 'reports-monthly-pos' ||Request::segment(1) == 'reports-pos-vs-purchase') ? 'active dash-trigger' : ''}}"
                                                     href="#crm-report" data-toggle="collapse" role="button"
                                                     aria-expanded="{{( Request::segment(1) == 'reports-warehouse' || Request::segment(1) == 'reports-daily-purchase' || Request::segment(1) == 'reports-monthly-purchase' || Request::segment(1) == 'reports-daily-pos' || Request::segment(1) == 'reports-monthly-pos' ||Request::segment(1) == 'reports-pos-vs-purchase') ? 'true' : 'false'}}">
@@ -210,15 +207,6 @@
                                                     <ul class="dash-submenu">
                                                         <li class="dash-item {{ request()->is('reports-warehouse') ? 'active' : '' }}">
                                                             <a class="dash-link" href="{{ route('report.warehouse') }}">{{__('Warehouse Report')}}</a>
-                                                        </li>
-                                                        <li class="dash-item {{ request()->is('reports-daily-purchase') || request()->is('reports-monthly-purchase') ? 'active' : '' }}">
-                                                            <a class="dash-link" href="{{ route('report.daily.purchase') }}">{{__('Purchase Daily/Monthly Report')}}</a>
-                                                        </li>
-                                                        <li class="dash-item {{ request()->is('reports-daily-pos') || request()->is('reports-monthly-pos') ? 'active' : '' }}">
-                                                            <a class="dash-link" href="{{ route('report.daily.pos') }}">{{__('POS Daily/Monthly Report')}}</a>
-                                                        </li>
-                                                        <li class="dash-item {{ request()->is('reports-pos-vs-purchase') ? 'active' : '' }}">
-                                                            <a class="dash-link" href="{{ route('report.pos.vs.purchase') }}">{{__('Pos VS Purchase Report')}}</a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -818,7 +806,13 @@
                     @endif
 
                         <!--------------------- End User Managaement System----------------------------------->
-
+                            <li class="dash-item dash-hasmenu {{ Request::is('farmer*')?' active dash-trigger':''}}">
+                                <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-location"></i></span><span class="dash-mtext">{{__('Farmer Mgmt.')}}</span><span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
+                                <ul class="dash-submenu {{Request::is('farmer*')?'show':''}}">
+                                    <li class="dash-item {{ Request::is('farmer/farming_registration*') ? ' active' : '' }}"><a class="dash-link" href="{{ route('farmer.farming_registration.index') }}">{{__('Farmer Registration')}}</a>
+                                    </li>
+                                </ul>
+                            </li>
 
                         <!--------------------- Start Products System ----------------------------------->
 
@@ -851,7 +845,7 @@
 
                         @if( Gate::check('manage warehouse') ||  Gate::check('manage purchase')  || Gate::check('manage pos') || Gate::check('manage print settings'))
                             <li class="dash-item dash-hasmenu {{ (Request::segment(1) == 'warehouse' || Request::segment(1) == 'purchase' || Request::route()->getName() == 'pos.barcode' || Request::route()->getName() == 'pos.print' || Request::route()->getName() == 'pos.show')?' active dash-trigger':''}}">
-                                <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-layers-difference"></i></span><span class="dash-mtext">{{__('POS System')}}</span><span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
+                                <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-layers-difference"></i></span><span class="dash-mtext">{{__('Inventory')}}</span><span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                                 <ul class="dash-submenu {{ (Request::segment(1) == 'warehouse' || Request::segment(1) == 'purchase' || Request::route()->getName() == 'pos.barcode' || Request::route()->getName() == 'pos.print' || Request::route()->getName() == 'pos.show')?'show':''}}">
                                     @can('manage warehouse')
                                         <li class="dash-item {{ (Request::route()->getName() == 'warehouse.index' || Request::route()->getName() == 'warehouse.show') ? ' active' : '' }}"><a class="dash-link" href="{{ route('warehouse.index') }}">{{__('Warehouse')}}</a>
@@ -862,15 +856,7 @@
                                             <a class="dash-link" href="{{ route('purchase.index') }}">{{__('Purchase')}}</a>
                                         </li>
                                     @endcan
-                                    @can('manage pos')
-                                        <li class="dash-item {{ (Request::route()->getName() == 'pos.index' ) ? ' active' : '' }}">
-                                            <a class="dash-link" href="{{ route('pos.index') }}">{{__(' Add POS')}}</a>
-                                        </li>
-
-                                        <li class="dash-item {{ (Request::route()->getName() == 'pos.report' || Request::route()->getName() == 'pos.show') ? ' active' : '' }}">
-                                            <a class="dash-link" href="{{ route('pos.report') }}">{{__('POS')}}</a>
-                                        </li>
-                                    @endcan
+                                   
                                         @can('manage warehouse')
                                             <li class="dash-item {{ (Request::route()->getName() == 'warehouse-transfer.index' || Request::route()->getName() == 'warehouse-transfer.show') ? ' active' : '' }}">
                                                 <a class="dash-link" href="{{ route('warehouse-transfer.index') }}">{{__('Transfer')}}</a>
@@ -922,8 +908,6 @@
                                     <span class="dash-mtext">{{ __('Email Template') }}</span></a>
                             </li>
 
-                            @include('landingpage::menu.landingpage')
-
                             <li class="dash-item dash-hasmenu {{ Request::is('location*')?' active dash-trigger':''}}">
                                 <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-location"></i></span><span class="dash-mtext">{{__('Location')}}</span><span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                                 <ul class="dash-submenu {{Request::is('location*')?'show':''}}">
@@ -941,13 +925,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dash-item dash-hasmenu {{ Request::is('farmer*')?' active dash-trigger':''}}">
-                                <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-location"></i></span><span class="dash-mtext">{{__('Farmer Management')}}</span><span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
-                                <ul class="dash-submenu {{Request::is('farmer*')?'show':''}}">
-                                    <li class="dash-item {{ Request::is('farmer/farming_registration*') ? ' active' : '' }}"><a class="dash-link" href="{{ route('farmer.farming_registration.index') }}">{{__('Farming Registration')}}</a>
-                                    </li>
-                                </ul>
-                            </li>
+
 
                         @endif
 

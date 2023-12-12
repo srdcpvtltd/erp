@@ -47,6 +47,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\FlutterwavePaymentController;
 use App\Http\Controllers\FormBuilderController;
+use App\Http\Controllers\Farming\FarmingController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\GoalTrackingController;
 use App\Http\Controllers\GoalTypeController;
@@ -1546,5 +1547,23 @@ Route::group(
         Route::resource('block',BlockController::class);   
         Route::resource('gram_panchyat',GramPanchyatController::class);
         Route::resource('village',VillageController::class);
+    }
+);
+Route::group(
+    [
+        'prefix' => 'farmer',
+        'as'=>'farmer.',
+        'middleware' => [
+            'auth',
+            'XSS',
+            'revalidate',
+        ],
+    ], function () {
+        Route::post('location/get_states',[FarmingController::class,'getStates'])->name('location.get_states');   
+        Route::post('location/get_districts',[FarmingController::class,'getDistricts'])->name('location.get_districts');   
+        Route::post('location/get_blocks',[FarmingController::class,'getBlocks'])->name('location.get_blocks');   
+        Route::post('location/get_gram_panchyats',[FarmingController::class,'getGramPanchyats'])->name('location.get_gram_panchyats');   
+        Route::post('location/get_villages',[FarmingController::class,'getVillages'])->name('location.get_villages');   
+        Route::resource('farming_registration',FarmingController::class);   
     }
 );

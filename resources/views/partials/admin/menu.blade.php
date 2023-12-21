@@ -806,6 +806,7 @@
                     @endif
 
                         <!--------------------- End User Managaement System----------------------------------->
+                        @if(Gate::check('manage farmering profile'))
                             <li class="dash-item dash-hasmenu {{ Request::is('farmer*')?' active dash-trigger':''}}">
                                 <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-location"></i></span><span class="dash-mtext">{{__('Farmer Mgmt.')}}</span><span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
                                 <ul class="dash-submenu {{Request::is('farmer*')?'show':''}}">
@@ -813,7 +814,7 @@
                                     </li>
                                 </ul>
                             </li>
-
+                        @endif
                         <!--------------------- Start Products System ----------------------------------->
 
                         @if( Gate::check('manage product & service') || Gate::check('manage product & service'))

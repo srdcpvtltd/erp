@@ -3061,6 +3061,30 @@ class UsersTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
+            [
+                'name' => 'manage farmering profile',
+                'guard_name' => 'web',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => 'create farmering profile',
+                'guard_name' => 'web',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => 'edit farmering profile',
+                'guard_name' => 'web',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => 'delete farmering profile',
+                'guard_name' => 'web',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         Permission::insert($arrPermissions);
@@ -3638,6 +3662,9 @@ class UsersTableSeeder extends Seeder
             ['name' => 'create webhook'],
             ['name' => 'edit webhook'],
             ['name' => 'delete webhook'],
+            ['name' => 'create farmering profile'],
+            ['name' => 'edit farmering profile'],
+            ['name' => 'delete farmering profile'],
         ];
 
         $companyRole->givePermissionTo($companyPermissions);

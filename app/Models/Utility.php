@@ -3287,6 +3287,10 @@ class Utility extends Model
             'create webhook',
             'edit webhook',
             'delete webhook',
+            'manage farmering profile',
+            'create farmering profile',
+            'edit farmering profile',
+            'delete farmering profile',
 
 
         ];
@@ -3343,6 +3347,10 @@ class Utility extends Model
             'show crm dashboard',
             'show pos dashboard',
             'share project',
+            'manage farmering profile',
+            'create farmering profile',
+            'edit farmering profile',
+            'delete farmering profile',
         ];
         foreach($companyNewPermission as $op)
         {

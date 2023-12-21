@@ -26,6 +26,8 @@ class Farming extends Model
         'language',
         'sms_mode',
         'created_by',
+        'farmer_id',
+        'is_validate',
     ];
 
     public function country()

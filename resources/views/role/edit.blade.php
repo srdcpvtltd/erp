@@ -258,7 +258,7 @@
                 </div>
                 <div class="tab-pane fade" id="crm" role="tabpanel" aria-labelledby="pills-profile-tab">
                     @php
-                        $modules=['crm dashboard','lead','pipeline','lead stage','source','label','deal','stage','task','form builder','form response','contract','contract type'];
+                        $modules=['crm dashboard','lead','pipeline','lead stage','source','label','deal','stage','task','form builder','form response','contract','contract type','farmer registration'];
                     @endphp
                     <div class="col-md-12">
                         <div class="form-group">
@@ -281,6 +281,7 @@
                                             <td><input type="checkbox" class="form-check-input align-middle ischeck crm_checkall"  data-id="{{str_replace(' ', '', $module)}}" ></td>
                                             <td><label class="ischeck crm_checkall" data-id="{{str_replace(' ', '', $module)}}">{{ ucfirst($module) }}</label></td>
                                             <td>
+                                                                                            
                                                 <div class="row ">
                                                     @if(in_array('view '.$module,(array) $permissions))
                                                         @if($key = array_search('view '.$module,$permissions))

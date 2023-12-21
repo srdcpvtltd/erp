@@ -152,4 +152,12 @@ class FarmingController extends Controller
         ]);
     }
 
+    public function validateProfile($id)
+    {
+        $farming = Farming::find($id);
+        $farming->update(['is_validate'=>1,'farmer_id'=>'ERP-'.random_int(100000, 999999)]);
+        return redirect()->to(route('farmer.farming_registration.index'))->with('success', 'Farming Registration Validated Successfully.');
+
+    }
+
 }

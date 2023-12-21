@@ -1564,6 +1564,7 @@ Route::group(
         Route::post('location/get_blocks',[FarmingController::class,'getBlocks'])->name('location.get_blocks');   
         Route::post('location/get_gram_panchyats',[FarmingController::class,'getGramPanchyats'])->name('location.get_gram_panchyats');   
         Route::post('location/get_villages',[FarmingController::class,'getVillages'])->name('location.get_villages');   
+        Route::get('farming_registration/validate/{id}',[FarmingController::class,'validateProfile'])->name('farming_registration.validate');   
         Route::resource('farming_registration',FarmingController::class);   
     }
 );

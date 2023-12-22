@@ -140,6 +140,9 @@ use App\Http\Controllers\WarningController;
 use App\Http\Controllers\ZoomMeetingController;
 use App\Http\Controllers\XenditPaymentController;
 use App\Http\Controllers\MidtransPaymentController;
+use App\Models\User;
+use App\Models\Utility;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -1568,3 +1571,11 @@ Route::group(
         Route::resource('farming_registration',FarmingController::class);   
     }
 );
+Route::get('migrate', function() {
+    Artisan::call('config:cache');
+    Artisan::call('migrate');
+    Artisan::call('view:clear');
+    Utility::addNewData();
+    User::defaultEmail();
+    return 'DONE';
+});

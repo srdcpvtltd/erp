@@ -357,11 +357,11 @@
                                                             </div>
                                                         @endif
                                                     @endif
-
+                                                    
                                                     @if(in_array('validate '.$module,(array) $permissions))
                                                         @if($key = array_search('validate '.$module,$permissions))
                                                             <div class="col-md-3 custom-control custom-checkbox">
-                                                                {{Form::checkbox('permissions[]',$key,$role->permission, ['class'=>'form-check-input crm_checkall isscheck_'.str_replace(' ', '', $module),'id' =>'permission'.$key])}}
+                                                                {{Form::checkbox('permissions[]',$key,false, ['class'=>'form-check-input isscheck crm_checkall isscheck_'.str_replace(' ', '', $module),'id' =>'permission'.$key])}}
                                                                 {{Form::label('permission'.$key,'Validate',['class'=>'custom-control-label'])}}<br>
                                                             </div>
                                                         @endif

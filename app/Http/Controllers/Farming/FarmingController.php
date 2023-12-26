@@ -21,7 +21,9 @@ class FarmingController extends Controller
      */
     public function index()
     {
-        $farmings = Farming::where('created_by',Auth::user()->id)->get();
+        $farmings = Farming::query()->select('farmings.*')->join('users','users.id','farmings.created_by')
+                    ->where('farmings.created_by',Auth::user()->id)
+                    ->orWhere('users.supervisor_id',Auth::user()->id)->get();
         return view('farmer.registration.index',compact('farmings'));
     }
 

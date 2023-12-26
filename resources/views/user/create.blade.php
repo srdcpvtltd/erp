@@ -33,6 +33,20 @@
                 </small>
                 @enderror
             </div>
+            <div class="form-group col-md-6">
+                {{ Form::label('supervisor_id', __('Supervisor'),['class'=>'form-label']) }}
+                <select class="form-control select" name="supervisor_id" id="supervisor_id" required placeholder="Select Supervisor">
+                    <option value="">{{__('Select Supervisor')}}</option>
+                    @foreach($supervisors as $key => $supervisor)
+                        <option value="{{ $supervisor->id }}">{{ $supervisor->name }}</option>
+                    @endforeach
+                </select>
+                @error('supervisor_id')
+                <small class="invalid-role" role="alert">
+                    <strong class="text-danger">{{ $message }}</strong>
+                </small>
+                @enderror
+            </div>
         @elseif(\Auth::user()->type == 'company')
             {!! Form::hidden('role', 'company', null,array('class' => 'form-control select2','required'=>'required')) !!}
         @endif

@@ -1,12 +1,12 @@
 
 @extends('layouts.admin')
 @section('page-title')
-    {{__('Edit Farming Registration')}}
+    {{__('Farming Guarantor Create')}}
 @endsection
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>
-    <li class="breadcrumb-item"><a href="{{route('farmer.farming_registration.index')}}">{{__('Farming Registration')}}</a></li>
-    <li class="breadcrumb-item">{{__('Edit Farming Registration')}}</li>
+    <li class="breadcrumb-item"><a href="{{route('farmer.guarantor.index')}}">{{__('Farming Guarantor')}}</a></li>
+    <li class="breadcrumb-item">{{__('Farming Guarantor Create')}}</li>
 @endsection
 @push('script-page')
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
@@ -126,23 +126,31 @@
 
 @section('content')
     <div class="row">
-        {{ Form::model($farming, array('route' => array('farmer.farming_registration.update',$farming->id), 'method' => 'PUT','class'=>'w-100')) }}
+        {{ Form::open(array('url' => 'farmer/guarantor','class'=>'w-100')) }}
         <div class="col-12">
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+            <input type="hidden" name="created_by" id="created_by" value="{{ Auth::user()->id }}">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             {{ Form::label('name', __('Name'),['class'=>'form-label']) }}
-                            {{ Form::text('name', $farming->name, array('class' => 'form-control','required'=>'required')) }}
+                            {{ Form::text('name', '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
                         <div class="form-group col-md-6">
-                            {{ Form::label('mobile', __('Mobile'),['class'=>'form-label']) }}
-                            {{ Form::number('mobile', $farming->mobile, array('class' => 'form-control','required'=>'required')) }}
+                            {{ Form::label('father_name', __('Father Name'),['class'=>'form-label']) }}
+                            {{ Form::text('father_name', '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
-                        <div class="form-group col-md-6">
-                            {{ Form::label('email', __('Email'),['class'=>'form-label']) }}
-                            {{ Form::email('email', $farming->email, array('class' => 'form-control','required'=>'required')) }}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('farming_id', __('Farmer Registration'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="farming_id" id="farming_id" required placeholder="Select Country">
+                                    <option value="">{{__('Select Farmer Registration')}}</option>
+                                    @foreach($farmings as $farming)
+                                        <option value="{{ $farming->id }}">{{ $farming->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -150,7 +158,7 @@
                                 <select class="form-control select" name="country_id" id="country_id" required placeholder="Select Country">
                                     <option value="">{{__('Select Country')}}</option>
                                     @foreach($countries as $country)
-                                        <option {{$farming->country_id == $country->id ? 'selected' : '' }} value="{{ $country->id }}">{{ $country->name }}</option>
+                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -160,9 +168,6 @@
                                 {{ Form::label('state_id', __('State'),['class'=>'form-label']) }}
                                 <select class="form-control select" name="state_id" id="state_id" placeholder="Select State" required>
                                     <option value="">{{__('Select State')}}</option>
-                                    @foreach($states as $state)
-                                        <option {{$farming->state_id == $state->id ? 'selected' : '' }} value="{{ $state->id }}">{{ $state->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -171,9 +176,6 @@
                                 {{ Form::label('district_id', __('District'),['class'=>'form-label']) }}
                                 <select class="form-control select" name="district_id" id="district_id" placeholder="Select District" required>
                                     <option value="">{{__('Select District')}}</option>
-                                    @foreach($districts as $district)
-                                        <option {{$farming->district_id == $district->id ? 'selected' : '' }} value="{{ $district->id }}">{{ $district->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -182,9 +184,6 @@
                                 {{ Form::label('block_id', __('Block'),['class'=>'form-label']) }}
                                 <select class="form-control select" name="block_id" id="block_id" placeholder="Select Block" required>
                                     <option value="">{{__('Select Block')}}</option>
-                                    @foreach($blocks as $block)
-                                        <option {{$farming->block_id == $block->id ? 'selected' : '' }} value="{{ $block->id }}">{{ $block->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -193,9 +192,6 @@
                                 {{ Form::label('gram_panchyat_id', __('Gram Panchyat'),['class'=>'form-label']) }}
                                 <select class="form-control select" name="gram_panchyat_id" id="gram_panchyat_id" placeholder="Select Gram Panchyat" required>
                                     <option value="">{{__('Select Gram Panchyat')}}</option>
-                                    @foreach($gram_panchyats as $gram_panchyat)
-                                        <option {{$farming->gram_panchyat_id == $gram_panchyat->id ? 'selected' : '' }} value="{{ $gram_panchyat->id }}">{{ $gram_panchyat->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -204,70 +200,31 @@
                                 {{ Form::label('village_id', __('Village'),['class'=>'form-label']) }}
                                 <select class="form-control select" name="village_id" id="village_id" placeholder="Select Village" required>
                                     <option value="">{{__('Select Village')}}</option>
-                                    @foreach($villages as $village)
-                                        <option {{$farming->village_id == $village->id ? 'selected' : '' }} value="{{ $village->id }}">{{ $village->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             {{ Form::label('post_office', __('Post Office'),['class'=>'form-label']) }}
-                            {{ Form::text('post_office', $farming->post_office, array('class' => 'form-control','required'=>'required')) }}
+                            {{ Form::text('post_office', '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
                         <div class="form-group col-md-6">
                             {{ Form::label('police_station', __('Police Station'),['class'=>'form-label']) }}
-                            {{ Form::text('police_station', $farming->police_station, array('class' => 'form-control','required'=>'required')) }}
+                            {{ Form::text('police_station',  '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
                         <div class="form-group col-md-6">
-                            {{ Form::label('registration_no', __('Registration No.'),['class'=>'form-label']) }}
-                            {{ Form::text('registration_no', $farming->registration_no, array('class' => 'form-control','required'=>'required')) }}
+                            {{ Form::label('registration_number', __('Registration No.'),['class'=>'form-label']) }}
+                            {{ Form::text('registration_number',  '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
                         <div class="form-group col-md-6">
                             {{ Form::label('age', __('Age'),['class'=>'form-label']) }}
-                            {{ Form::number('age', $farming->age, array('class' => 'form-control','required'=>'required')) }}
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ Form::label('gender', __('Gender'),['class'=>'form-label']) }}
-                            <select class="form-control select" name="gender" id="gender" placeholder="Select Gender" required>
-                                <option value="">{{__('Select Gender')}}</option>
-                                <option {{$farming->gender == 'Male' ? 'selected' : ''}} value="Male">{{__('Male')}}</option>
-                                <option {{$farming->gender == 'Female' ? 'selected' : ''}} value="Female">{{__('Female')}}</option>
-                            </select>                        
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ Form::label('qualification', __('Qualification'),['class'=>'form-label']) }}
-                            <select class="form-control select" name="qualification" id="qualification" placeholder="Select Qualification" required>
-                                <option value="">{{__('Select Qualification')}}</option>
-                                <option {{$farming->qualification == '10th Standard' ? 'selected' : ''}} value="10th Standard">{{__('10th Standard')}}</option>
-                                <option {{$farming->qualification == '12th Standard' ? 'selected' : ''}} value="12th Standard">{{__('12th Standard')}}</option>
-                                <option {{$farming->qualification == 'Bachelor Degree' ? 'selected' : ''}} value="Bachelor Degree">{{__('Bachelor Degree')}}</option>
-                                <option {{$farming->qualification == 'Master Degree' ? 'selected' : ''}} value="Master Degree">{{__('Master Degree')}}</option>
-                                <option {{$farming->qualification == 'PHD' ? 'selected' : ''}} value="PHD">{{__('PHD')}}</option>
-                            </select>  
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ Form::label('land_holding', __('Land Holding (In Acre)'),['class'=>'form-label']) }}
-                            {{ Form::number('land_holding', $farming->land_holding, array('class' => 'form-control','step' => '0.01','required'=>'required')) }}
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ Form::label('language', __('Language'),['class'=>'form-label']) }}
-                            <br>
-                            <label><input type="radio" name="language" value="Hindi" {{$farming->language == 'Hindi' ? 'checked' :'' }}> Hindi</label>
-                            <label><input type="radio" name="language" value="English" {{$farming->language == 'English' ? 'checked' :'' }}> English</label>
-                            <label><input type="radio" name="language" value="Odia" {{$farming->language == 'Odia' ? 'checked' :'' }}> Odia</label>
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ Form::label('sms_mode', __('Sms Mode'),['class'=>'form-label']) }}
-                            <br>
-                            <label><input type="radio" name="sms_mode"  {{$farming->sms_mode == 'Text' ? 'checked' :'' }} value="Text" checked> Text</label>
-                            <label><input type="radio" name="sms_mode"  {{$farming->sms_mode == 'Voice' ? 'checked' :'' }} value="Voice"> Voice</label>
+                            {{ Form::number('age', '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
                     </div>
                 </div>
             </div>
 
         <div class="modal-footer">
-            <input type="button" value="{{__('Cancel')}}" onclick="location.href = '{{route("farmer.farming_registration.index")}}';" class="btn btn-light">
+            <input type="button" value="{{__('Cancel')}}" onclick="location.href = '{{route("farmer.guarantor.index")}}';" class="btn btn-light">
             <input type="submit" value="{{__('Create')}}" class="btn  btn-primary">
         </div>
     {{ Form::close() }}

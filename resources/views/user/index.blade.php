@@ -7,7 +7,9 @@ $profile=\App\Models\Utility::get_file('uploads/avatar');
     {{__('Manage User')}}
 @endsection
 @push('script-page')
-
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('js/jquery.repeater.min.js')}}"></script>
+    
 @endpush
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('Dashboard')}}</a></li>

@@ -812,6 +812,14 @@
                                 <ul class="dash-submenu {{Request::is('farmer*')?'show':''}}">
                                     <li class="dash-item {{ Request::is('farmer/farming_registration*') ? ' active' : '' }}"><a class="dash-link" href="{{ route('farmer.farming_registration.index') }}">{{__('Farmer Registration')}}</a>
                                     </li>
+                                    @if(Gate::check('manage farmer guarantor'))
+                                    <li class="dash-item {{ Request::is('farmer/guarantor*') ? ' active' : '' }}"><a class="dash-link" href="{{ route('farmer.guarantor.index') }}">{{__('Farmer Guarantor')}}</a>
+                                    </li>
+                                    @endif
+                                    @if(Gate::check('manage farmer security deposit'))
+                                    <li class="dash-item {{ Request::is('farmer/payment*') ? ' active' : '' }}"><a class="dash-link" href="{{ route('farmer.payment.index') }}">{{__('Security Deposit')}}</a>
+                                    </li>
+                                    @endif
                                 </ul>
                             </li>
                         @endif

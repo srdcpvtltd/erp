@@ -48,6 +48,8 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\FlutterwavePaymentController;
 use App\Http\Controllers\FormBuilderController;
 use App\Http\Controllers\Farming\FarmingController;
+use App\Http\Controllers\Farming\FarmingPaymentController;
+use App\Http\Controllers\Farming\GuarantorController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\GoalTrackingController;
 use App\Http\Controllers\GoalTypeController;
@@ -1569,6 +1571,8 @@ Route::group(
         Route::post('location/get_villages',[FarmingController::class,'getVillages'])->name('location.get_villages');   
         Route::get('farming_registration/validate/{id}',[FarmingController::class,'validateProfile'])->name('farming_registration.validate');   
         Route::resource('farming_registration',FarmingController::class);   
+        Route::resource('guarantor',GuarantorController::class);   
+        Route::resource('payment',FarmingPaymentController::class);   
     }
 );
 Route::get('migrate', function() {

@@ -38,6 +38,7 @@ class User extends Authenticatable
         'requested_plan',
         'last_login_at',
         'created_by',
+        'supervisor_id'
     ];
 
     protected $hidden = [

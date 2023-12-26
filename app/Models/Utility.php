@@ -3292,6 +3292,14 @@ class Utility extends Model
             'edit farmer registration',
             'delete farmer registration',
             'validate farmer registration',
+            'manage farmer guarantor',
+            'create farmer guarantor',
+            'edit farmer guarantor',
+            'delete farmer guarantor',            
+            'manage farmer security deposit',
+            'create farmer security deposit',
+            'edit farmer security deposit',
+            'delete farmer security deposit',
 
 
         ];
@@ -3353,6 +3361,14 @@ class Utility extends Model
             'edit farmer registration',
             'delete farmer registration',
             'validate farmer registration',
+            'manage farmer guarantor',
+            'create farmer guarantor',
+            'edit farmer guarantor',
+            'delete farmer guarantor',
+            'manage farmer security deposit',
+            'create farmer security deposit',
+            'edit farmer security deposit',
+            'delete farmer security deposit',
         ];
         foreach($companyNewPermission as $op)
         {

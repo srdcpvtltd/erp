@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Farming extends Model
+class Guarantor extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'name',
-        'mobile',
-        'email',
+        'farming_id',
+        'father_name',
+        'registration_number',
         'country_id',
         'state_id',
         'district_id',
@@ -20,18 +21,15 @@ class Farming extends Model
         'gram_panchyat_id',
         'village_id',
         'age',
-        'gender',
-        'qualification',
-        'land_holding',
-        'language',
-        'sms_mode',
         'created_by',
-        'farmer_id',
-        'is_validate',
         'post_office',
         'police_station',
-        'registration_no',
     ];
+    
+    public function farming()
+    {
+        return $this->belongsTo(Farming::class,'farming_id');
+    }
 
     public function country()
     {

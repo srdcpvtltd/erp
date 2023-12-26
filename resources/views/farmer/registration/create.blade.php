@@ -197,6 +197,18 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
+                            {{ Form::label('post_office', __('Post Office'),['class'=>'form-label']) }}
+                            {{ Form::text('post_office', '', array('class' => 'form-control','required'=>'required')) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('police_station', __('Police Station'),['class'=>'form-label']) }}
+                            {{ Form::text('police_station',  '', array('class' => 'form-control','required'=>'required')) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('registration_no', __('Registration No.'),['class'=>'form-label']) }}
+                            {{ Form::text('registration_no',  '', array('class' => 'form-control','required'=>'required')) }}
+                        </div>
+                        <div class="form-group col-md-6">
                             {{ Form::label('age', __('Age'),['class'=>'form-label']) }}
                             {{ Form::number('age', '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
@@ -220,8 +232,8 @@
                             </select>  
                         </div>
                         <div class="form-group col-md-6">
-                            {{ Form::label('land_holding', __('Land Holding'),['class'=>'form-label']) }}
-                            {{ Form::text('land_holding', '', array('class' => 'form-control','required'=>'required')) }}
+                            {{ Form::label('land_holding', __('Land Holding (In Acre)'),['class'=>'form-label']) }}
+                            {{ Form::number('land_holding', '', array('class' => 'form-control','step' => '0.01','required'=>'required')) }}
                         </div>
                         <div class="form-group col-md-6">
                             {{ Form::label('language', __('Language'),['class'=>'form-label']) }}

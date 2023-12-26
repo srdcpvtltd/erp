@@ -21,6 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $user = \Auth::user();
+        // dd($user->type);
         if (\Auth::user()->can('manage user')) {
             $users = User::where('created_by', '=', $user->creatorId())->where('type', '!=', 'client')->get();
 
@@ -37,8 +38,15 @@ class UserController extends Controller
         $customFields = CustomField::where('created_by', '=', \Auth::user()->creatorId())->where('module', '=', 'user')->get();
         $user = \Auth::user();
         $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'client')->get()->pluck('name', 'id');
+        $supervisor_role = Role::where('name','Superviser')->first();
+        if($supervisor_role)
+        {
+            $supervisors = User::where('type','Superviser')->get();
+        }else{
+            $supervisors = [];
+        }
         if (\Auth::user()->can('create user')) {
-            return view('user.create', compact('roles', 'customFields'));
+            return view('user.create', compact('roles', 'customFields','supervisors'));
         } else {
             return redirect()->back();
         }
@@ -104,13 +112,20 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = \Auth::user();
+        // dd($user);
         $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'client')->get()->pluck('name', 'id');
         if (\Auth::user()->can('edit user')) {
             $user = User::findOrFail($id);
             $user->customField = CustomField::getData($user, 'user');
             $customFields = CustomField::where('created_by', '=', \Auth::user()->creatorId())->where('module', '=', 'user')->get();
-
-            return view('user.edit', compact('user', 'roles', 'customFields'));
+            $supervisor_role = Role::where('name','Superviser')->first();
+            if($supervisor_role)
+            {
+                $supervisors = User::where('type','Superviser')->get();
+            }else{
+                $supervisors = [];
+            }
+            return view('user.edit', compact('user', 'roles', 'customFields','supervisors','supervisor_role'));
         } else {
             return redirect()->back();
         }

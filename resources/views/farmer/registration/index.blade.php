@@ -63,7 +63,7 @@
                                     </td>
                                     <td class="Action">
                                         @can('validate farmer registration')
-                                        @if( !@$farming->is_validate)
+                                        @if( !@$farming->is_validate && $farming->created_by != Auth::user()->id)
                                         <div class="action-btn bg-warning ms-2">
                                             <a href="{{route('farmer.farming_registration.validate',$farming->id)}}" data-bs-toggle="tooltip" title="{{__('Validate')}}"  class="mx-3 btn  btn-sm  align-items-center">
                                                 <i class="ti ti-rss text-white"></i>

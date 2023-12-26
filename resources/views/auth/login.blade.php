@@ -137,13 +137,4 @@
     {{Form::close()}}
 @endsection --}}
 
-<script src="{{asset('js/jquery.min.js')}}"></script>
-<script>
-    $(document).ready(function () {
-        $("#form_data").submit(function (e) {
-            $("#login_button").attr("disabled", true);
-            return true;
-        });
-    });
-</script>
 

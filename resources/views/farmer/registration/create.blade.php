@@ -141,10 +141,10 @@
                             {{ Form::label('mobile', __('Mobile'),['class'=>'form-label']) }}
                             {{ Form::number('mobile', '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
-                        <div class="form-group col-md-6">
+                        {{-- <div class="form-group col-md-6">
                             {{ Form::label('email', __('Email'),['class'=>'form-label']) }}
                             {{ Form::email('email', '', array('class' => 'form-control','required'=>'required')) }}
-                        </div>
+                        </div> --}}
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ Form::label('country_id', __('Country'),['class'=>'form-label']) }}

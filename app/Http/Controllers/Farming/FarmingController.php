@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Block;
 use App\Models\Country;
 use App\Models\District;
+use App\Models\FarmingPayment;
 use App\Models\GramPanchyat;
+use App\Models\Guarantor;
 use App\Models\State;
 use App\Models\Village;
 use Exception;
@@ -44,7 +46,6 @@ class FarmingController extends Controller
         try{
             $this->validate($request,[
                 'name' => 'required',
-                'email' => 'required',
                 'mobile' => 'required',
                 'country_id' => 'required',
                 'state_id' => 'required',
@@ -71,9 +72,12 @@ class FarmingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Farming $farming)
+    public function show($id)
     {
-        //
+        $farming = Farming::find($id);
+        $guarantors = Guarantor::where('farming_id',$farming->id)->get();
+        $payments = FarmingPayment::where('farming_id',$farming->id)->get();
+        return view('farmer.registration.show',compact('farming','guarantors','payments'));
     }
 
     /**

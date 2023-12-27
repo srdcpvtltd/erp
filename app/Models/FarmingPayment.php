@@ -9,13 +9,18 @@ class FarmingPayment extends Model
 {
     use HasFactory;
 
+    const SECURITY_DEPOSIT = 'Security Deposit';
+    const BANK_GUARANTEE = 'Bank Guarantee';
+
     protected $fillable = [
         'farming_id',
         'registration_number',
         'agreement_number',
         'date',
         'amount',
+        'type',
         'created_by',
+        'bank',
     ];
 
     public function farming()

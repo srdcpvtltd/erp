@@ -76,8 +76,11 @@ class FarmingController extends Controller
     {
         $farming = Farming::find($id);
         $guarantors = Guarantor::where('farming_id',$farming->id)->get();
-        $payments = FarmingPayment::where('farming_id',$farming->id)->get();
-        return view('farmer.registration.show',compact('farming','guarantors','payments'));
+        $security_deposits = FarmingPayment::where('farming_id',$farming->id)
+                    ->where('type',FarmingPayment::SECURITY_DEPOSIT)->get();
+        $bank_guarantees = FarmingPayment::where('farming_id',$farming->id)
+                    ->where('type',FarmingPayment::BANK_GUARANTEE)->get();
+        return view('farmer.registration.show',compact('farming','guarantors','security_deposits','bank_guarantees'));
     }
 
     /**

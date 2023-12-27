@@ -16,7 +16,7 @@ class FarmingPaymentController extends Controller
      */
     public function index()
     {
-        $payments = FarmingPayment::where('created_by',Auth::user()->id)->get();
+        $payments = FarmingPayment::where('type',FarmingPayment::SECURITY_DEPOSIT)->where('created_by',Auth::user()->id)->get();
         return view('farmer.payment.index',compact('payments'));
     }
 
@@ -26,8 +26,9 @@ class FarmingPaymentController extends Controller
     public function create()
     {
         $farmings = Farming::query()->select('farmings.*')->join('users','users.id','farmings.created_by')
-                    ->where('farmings.created_by',Auth::user()->id)
                     ->where('farmings.is_validate',1)
+                    ->where('farmings.created_by',Auth::user()->id)
+                    ->orWhere('users.supervisor_id',Auth::user()->id)
                     ->get();
         return view('farmer.payment.create',compact('farmings'));
     }
@@ -40,11 +41,11 @@ class FarmingPaymentController extends Controller
         try{
             $this->validate($request,[
                 'farming_id' => 'required',
-                'amount' => 'required',
+                // 'amount' => 'required',
                 'created_by' => 'required',
             ]);
             FarmingPayment::create($request->all());
-            return redirect()->to(route('farmer.payment.index'))->with('success', 'Payment Added Successfully.');
+            return redirect()->to(route('farmer.farming_registration.show',$request->farming_id))->with('success', 'Payment Added Successfully.');
         }catch (Exception $e)
         {
             return redirect()->back()->with('error', $e->getMessage());
@@ -66,8 +67,9 @@ class FarmingPaymentController extends Controller
     {
         $payment = FarmingPayment::find($id); 
         $farmings = Farming::query()->select('farmings.*')->join('users','users.id','farmings.created_by')
-                    ->where('farmings.created_by',Auth::user()->id)
                     ->where('farmings.is_validate',1)
+                    ->where('farmings.created_by',Auth::user()->id)
+                    ->orWhere('users.supervisor_id',Auth::user()->id)
                     ->get();
         return view('farmer.payment.edit', compact(
             'payment',
@@ -93,5 +95,14 @@ class FarmingPaymentController extends Controller
         $farmingPayment = FarmingPayment::find($id);
         $farmingPayment->delete();
         return redirect()->back()->with('success', 'Farming Payment Deleted Successfully.');
+    }
+    public function bankGuarantee()
+    {
+        $farmings = Farming::query()->select('farmings.*')->join('users','users.id','farmings.created_by')
+                    ->where('farmings.is_validate',1)
+                    ->where('farmings.created_by',Auth::user()->id)
+                    ->orWhere('users.supervisor_id',Auth::user()->id)
+                    ->get();
+        return view('farmer.bank_guarantee.create',compact('farmings'));
     }
 }

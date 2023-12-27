@@ -25,16 +25,38 @@
                         <li class="nav-item">
                             <a class="nav-link" id="farmer-payment-tab" data-bs-toggle="pill" href="#payment" role="tab" aria-controls="pills-contact" aria-selected="false">{{__('Farmer Payments')}}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="farmer-bank_guarantee-tab" data-bs-toggle="pill" href="#bank_guarantee" role="tab" aria-controls="pills-bank_guarantee" aria-selected="false">{{__('Farmer Issue Bank Guarantee')}}</a>
+                        </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="detail" role="tabpanel" aria-labelledby="pills-home-tab">
-                            @include('farmer.registration.partials.detail')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @include('farmer.registration.partials.detail')
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="guarantor" role="tabpanel" aria-labelledby="pills-profile-tab">
-                            @include('farmer.registration.partials.guarantors')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @include('farmer.registration.partials.guarantors')
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="pills-contact-tab">
-                            @include('farmer.registration.partials.payments')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @include('farmer.registration.partials.payments')
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="bank_guarantee" role="tabpanel" aria-labelledby="pills-bank_guarantee-tab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @include('farmer.registration.partials.bank_guarantee')
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

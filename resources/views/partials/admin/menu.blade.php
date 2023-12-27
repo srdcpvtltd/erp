@@ -820,6 +820,10 @@
                                     <li class="dash-item {{ Request::is('farmer/payment*') ? ' active' : '' }}"><a class="dash-link" href="{{ route('farmer.payment.index') }}">{{__('Security Deposit')}}</a>
                                     </li>
                                     @endif
+                                    @if(Gate::check('manage farmer security deposit'))
+                                    <li class="dash-item {{ Request::is('farmer/allotment*') ? ' active' : '' }}"><a class="dash-link" href="{{ route('farmer.allotment.index') }}">{{__('Allotment')}}</a>
+                                    </li>
+                                    @endif
                                 </ul>
                             </li>
                         @endif

@@ -1,7 +1,8 @@
-<div class="table-responsive">
+<div class="table-responsive mt-2">
     <table class="table datatable">
         <thead>
         <tr>
+            <th>{{__('Type')}}</th>
             <th>{{__('Farmer Name')}}</th>
             <th>{{__('Registration No.')}}</th>
             <th>{{__('Agreement No.')}}</th>
@@ -10,13 +11,14 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($payments as $payment)
+        @foreach ($security_deposits as $security_deposit)
             <tr class="font-style">
-                <td>{{ @$payment->farming->name}}</td>
-                <td>{{ $payment->registration_number}}</td>
-                <td>{{ $payment->agreement_number}}</td>
-                <td>{{ $payment->date }}</td>
-                <td>{{ $payment->amount }}</td>
+                <td>{{ @$security_deposit->type}}</td>
+                <td>{{ @$security_deposit->farming->name}}</td>
+                <td>{{ $security_deposit->registration_number}}</td>
+                <td>{{ $security_deposit->agreement_number}}</td>
+                <td>{{ $security_deposit->date }}</td>
+                <td>{{ $security_deposit->amount }}</td>
             </tr>
         @endforeach
 

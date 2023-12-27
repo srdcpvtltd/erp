@@ -29,6 +29,7 @@
                         <table class="table datatable">
                             <thead>
                             <tr>
+                                <th>{{__('Type')}}</th>
                                 <th>{{__('Farmer Name')}}</th>
                                 <th>{{__('Registration No.')}}</th>
                                 <th>{{__('Agreement No.')}}</th>
@@ -40,6 +41,7 @@
                             <tbody>
                             @foreach ($payments as $payment)
                                 <tr class="font-style">
+                                    <td>{{ @$payment->type}}</td>
                                     <td>{{ @$payment->farming->name}}</td>
                                     <td>{{ $payment->registration_number}}</td>
                                     <td>{{ $payment->agreement_number}}</td>

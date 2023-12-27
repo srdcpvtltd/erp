@@ -1572,7 +1572,9 @@ Route::group(
         Route::get('farming_registration/validate/{id}',[FarmingController::class,'validateProfile'])->name('farming_registration.validate');   
         Route::resource('farming_registration',FarmingController::class);   
         Route::resource('guarantor',GuarantorController::class);   
+        Route::get('bank_guarantee',[FarmingPaymentController::class,'bankGuarantee'])->name('bank_guarantee.index');   
         Route::resource('payment',FarmingPaymentController::class);   
+        Route::view('allotment','farmer.allotment.index')->name('allotment.index');
     }
 );
 Route::get('migrate', function() {

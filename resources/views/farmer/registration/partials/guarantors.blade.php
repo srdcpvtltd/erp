@@ -2,8 +2,7 @@
     <table class="table datatable">
         <thead>
         <tr>
-            <th>{{__('Name')}}</th>
-            <th>{{__('Farmer Name')}}</th>
+            <th>{{__('Guarantor Name')}}</th>
             <th>{{__('Registration No.')}}</th>
             <th>{{__('Age')}}</th>
             <th>{{__('Father Name')}}</th>
@@ -19,7 +18,6 @@
         @foreach ($guarantors as $guarantor)
             <tr class="font-style">
                 <td>{{ $guarantor->name}}</td>
-                <td>{{ @$guarantor->farming->name}}</td>
                 <td>{{ $guarantor->registration_number}}</td>
                 <td>{{ $guarantor->age}}</td>
                 <td>{{ $guarantor->father_name}}</td>

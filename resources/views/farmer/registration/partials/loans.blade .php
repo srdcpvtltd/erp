@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th>{{__('Type')}}</th>
-            <th>{{__('Name')}}</th>
+            <th>{{__('Farmer Name')}}</th>
             <th>{{__('Registration No.')}}</th>
             <th>{{__('Agreement No.')}}</th>
             <th>{{__('Date')}}</th>

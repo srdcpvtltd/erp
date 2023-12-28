@@ -9,7 +9,7 @@ class FarmingPayment extends Model
 {
     use HasFactory;
 
-    const SECURITY_DEPOSIT = 'Security Deposit';
+    const SECURITY_DEPOSIT = 'Share Deposit';
     const BANK_GUARANTEE = 'Bank Guarantee';
 
     protected $fillable = [

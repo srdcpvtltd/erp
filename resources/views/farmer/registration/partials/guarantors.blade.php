@@ -6,7 +6,6 @@
             <th>{{__('Registration No.')}}</th>
             <th>{{__('Age')}}</th>
             <th>{{__('Father Name')}}</th>
-            <th>{{__('Post')}}</th>
             <th>{{__('Post Office')}}</th>
             <th>{{__('Police Station')}}</th>
             <th>{{__('District')}}</th>

@@ -57,7 +57,7 @@
                         <div class="tab-pane fade" id="loans" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @include('farmer.registration.partials.loans')
+                                    @include('farmer.registration.partials.payments')
                                 </div>
                             </div>
                         </div>

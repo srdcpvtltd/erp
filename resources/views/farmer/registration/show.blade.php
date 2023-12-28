@@ -26,7 +26,7 @@
                             <a class="nav-link" id="farmer-payment-tab" data-bs-toggle="pill" href="#payment" role="tab" aria-controls="pills-contact" aria-selected="false">{{__('Payments')}}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="farmer-payment-tab" data-bs-toggle="pill" href="#payment" role="tab" aria-controls="pills-contact" aria-selected="false">{{__('Loans')}}</a>
+                            <a class="nav-link" id="farmer-payment-tab" data-bs-toggle="pill" href="#loans" role="tab" aria-controls="pills-contact" aria-selected="false">{{__('Loans')}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="farmer-bank_guarantee-tab" data-bs-toggle="pill" href="#bank_guarantee" role="tab" aria-controls="pills-bank_guarantee" aria-selected="false">{{__('Issued Bank Guarantee')}}</a>

@@ -54,6 +54,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="loans" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @include('farmer.registration.partials.loans')
+                                </div>
+                            </div>
+                        </div>
                         <div class="tab-pane fade" id="bank_guarantee" role="tabpanel" aria-labelledby="pills-bank_guarantee-tab">
                             <div class="row">
                                 <div class="col-md-12">

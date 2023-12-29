@@ -89,7 +89,7 @@ class ProductService extends Model
 
     public function getTotalProductQuantity()
     {
-        $totalquantity = $purchasedquantity = $posquantity = 0;
+        $totalquantity = $purchasedquantity = $posquantity = $loan = 0;
         $authuser = Auth::user();
         $product_id = $this->id;
         $purchases = Purchase::where('created_by', $authuser->creatorId());
@@ -121,6 +121,7 @@ class ProductService extends Model
             $positem = PosProduct::select('quantity')->where('pos_id', $pos->id)->where('product_id', $product_id)->first();
             $posquantity += $positem != null ? $positem->quantity : 0;
         }
+        $loan = FarmerLoan::where('created_by',Auth::user()->id)->count('quantity');
 
         $totalquantity = $purchasedquantity - $posquantity;
 

@@ -48,6 +48,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\FlutterwavePaymentController;
 use App\Http\Controllers\FormBuilderController;
 use App\Http\Controllers\Farming\FarmingController;
+use App\Http\Controllers\Farming\FarmerLoanController;
 use App\Http\Controllers\Farming\FarmingPaymentController;
 use App\Http\Controllers\Farming\GuarantorController;
 use App\Http\Controllers\GoalController;
@@ -1575,6 +1576,9 @@ Route::group(
         Route::get('bank_guarantee',[FarmingPaymentController::class,'bankGuarantee'])->name('bank_guarantee.index');   
         Route::resource('payment',FarmingPaymentController::class);   
         Route::view('allotment','farmer.allotment.index')->name('allotment.index');
+        Route::post('get_product_service_by_category',[FarmerLoanController::class,'getProductServiceByCategory'])->name('loan.get_product_service_by_category');   
+        Route::post('get_product_service_detail',[FarmerLoanController::class,'getProductServiceDetail'])->name('loan.get_product_service_detail');   
+        Route::resource('loan',FarmerLoanController::class);   
     }
 );
 Route::get('migrate', function() {

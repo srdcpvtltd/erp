@@ -3301,6 +3301,10 @@ class Utility extends Model
             'edit farmer security deposit',
             'delete farmer security deposit',
             'show farmer registration',
+            'manage farmer loan',
+            'create farmer loan',
+            'edit farmer loan',
+            'delete farmer loan',
         ];
         foreach($arrPermissions as $ap)
         {
@@ -3369,6 +3373,10 @@ class Utility extends Model
             'edit farmer security deposit',
             'delete farmer security deposit',
             'show farmer registration',
+            'manage farmer loan',
+            'create farmer loan',
+            'edit farmer loan',
+            'delete farmer loan',
         ];
         foreach($companyNewPermission as $op)
         {

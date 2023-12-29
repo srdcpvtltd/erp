@@ -17,16 +17,19 @@
                 <div class="card-body table-border-style">    
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="farmer-detail-tab" data-bs-toggle="pill" href="#detail" role="tab" aria-controls="pills-home" aria-selected="true">{{__('Farmer Registration Detail')}}</a>
+                            <a class="nav-link active" id="farmer-detail-tab" data-bs-toggle="pill" href="#detail" role="tab" aria-controls="pills-home" aria-selected="true">{{__('Farmer Details')}}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="farmer-guarantor-tab" data-bs-toggle="pill" href="#guarantor" role="tab" aria-controls="pills-profile" aria-selected="false">{{__('Farmer Guarantors')}}</a>
+                            <a class="nav-link" id="farmer-guarantor-tab" data-bs-toggle="pill" href="#guarantor" role="tab" aria-controls="pills-profile" aria-selected="false">{{__('Guarantors')}}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="farmer-payment-tab" data-bs-toggle="pill" href="#payment" role="tab" aria-controls="pills-contact" aria-selected="false">{{__('Farmer Payments')}}</a>
+                            <a class="nav-link" id="farmer-payment-tab" data-bs-toggle="pill" href="#payment" role="tab" aria-controls="pills-contact" aria-selected="false">{{__('Payments')}}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="farmer-bank_guarantee-tab" data-bs-toggle="pill" href="#bank_guarantee" role="tab" aria-controls="pills-bank_guarantee" aria-selected="false">{{__('Farmer Issue Bank Guarantee')}}</a>
+                            <a class="nav-link" id="farmer-payment-tab" data-bs-toggle="pill" href="#loans" role="tab" aria-controls="pills-contact" aria-selected="false">{{__('Loans')}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="farmer-bank_guarantee-tab" data-bs-toggle="pill" href="#bank_guarantee" role="tab" aria-controls="pills-bank_guarantee" aria-selected="false">{{__('Issued Bank Guarantee')}}</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
@@ -45,6 +48,13 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @include('farmer.registration.partials.payments')
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="loans" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <div class="row">
                                 <div class="col-md-12">
                                     @include('farmer.registration.partials.payments')

@@ -11,6 +11,7 @@ class FarmingPayment extends Model
 
     const SECURITY_DEPOSIT = 'Security Deposit';
     const BANK_GUARANTEE = 'Bank Guarantee';
+    const REIMBURSEMENT = 'Reimbursement';
 
     protected $fillable = [
         'farming_id',

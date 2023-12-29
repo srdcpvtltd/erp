@@ -1162,7 +1162,7 @@
                 </div>
                 <div class="tab-pane fade" id="farmer" role="tabpanel" aria-labelledby="pills-profile-tab">
                     @php
-                        $modules=['farmer registration','farmer guarantor','farmer security deposit','farmer loan'];
+                        $modules=['farmer registration','farmer guarantor','farmer security deposit','farmer loan','farmer reimbursement'];
                     @endphp
                     <div class="col-md-12">
                         <div class="form-group">

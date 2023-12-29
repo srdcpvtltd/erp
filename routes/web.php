@@ -1578,7 +1578,10 @@ Route::group(
         Route::view('allotment','farmer.allotment.index')->name('allotment.index');
         Route::post('get_product_service_by_category',[FarmerLoanController::class,'getProductServiceByCategory'])->name('loan.get_product_service_by_category');   
         Route::post('get_product_service_detail',[FarmerLoanController::class,'getProductServiceDetail'])->name('loan.get_product_service_detail');   
+        Route::post('get_farming_detail',[FarmerLoanController::class,'getFarmingDetail'])->name('loan.get_farming_detail');   
         Route::resource('loan',FarmerLoanController::class);   
+        Route::get('reimbursement/create',[FarmingPaymentController::class,'reimbursementCreate'])->name('reimbursement.create');   
+        Route::get('reimbursement',[FarmingPaymentController::class,'reimbursement'])->name('reimbursement.index');   
     }
 );
 Route::get('migrate', function() {

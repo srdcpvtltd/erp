@@ -13,6 +13,23 @@
     <script src="{{asset('js/jquery.repeater.min.js')}}"></script>
     <script>  
     $(document).ready(function(){
+        $('#farming_id').change(function(){
+            let farming_id = $(this).val();
+            $.ajax({
+                url: "{{route('farmer.loan.get_farming_detail')}}",
+                method: 'post',
+                data: {
+                    farming_id: farming_id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(response){
+                    $('#registration_number').val(response.farming.registration_no);
+                    // $('#agreement_number').val(response.farming.registration_number);
+                }
+            });
+        });
         $('#loan_category_id').change(function(){
             let loan_category_id = $(this).val();
             $.ajax({

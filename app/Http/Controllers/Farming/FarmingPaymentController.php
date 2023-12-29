@@ -105,4 +105,18 @@ class FarmingPaymentController extends Controller
                     ->get();
         return view('farmer.bank_guarantee.create',compact('farmings'));
     }
+    public function reimbursement()
+    {
+        $payments = FarmingPayment::where('type',FarmingPayment::REIMBURSEMENT)->where('created_by',Auth::user()->id)->get();
+        return view('farmer.reimbursement.index',compact('payments'));
+    }
+    public function reimbursementCreate()
+    {
+        $farmings = Farming::query()->select('farmings.*')->join('users','users.id','farmings.created_by')
+                    ->where('farmings.is_validate',1)
+                    ->where('farmings.created_by',Auth::user()->id)
+                    ->orWhere('users.supervisor_id',Auth::user()->id)
+                    ->get();
+        return view('farmer.reimbursement.create',compact('farmings'));
+    }
 }

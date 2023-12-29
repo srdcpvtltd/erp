@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Block;
 use App\Models\Country;
 use App\Models\District;
+use App\Models\FarmerLoan;
 use App\Models\FarmingPayment;
 use App\Models\GramPanchyat;
 use App\Models\Guarantor;
@@ -77,10 +78,11 @@ class FarmingController extends Controller
         $farming = Farming::find($id);
         $guarantors = Guarantor::where('farming_id',$farming->id)->get();
         $security_deposits = FarmingPayment::where('farming_id',$farming->id)
-                    ->where('type',FarmingPayment::SECURITY_DEPOSIT)->get();
+                    ->whereIn('type',[FarmingPayment::SECURITY_DEPOSIT,FarmingPayment::REIMBURSEMENT])->get();
         $bank_guarantees = FarmingPayment::where('farming_id',$farming->id)
                     ->where('type',FarmingPayment::BANK_GUARANTEE)->get();
-        return view('farmer.registration.show',compact('farming','guarantors','security_deposits','bank_guarantees'));
+        $loans = FarmerLoan::where('farming_id',$farming->id)->get();
+        return view('farmer.registration.show',compact('farming','guarantors','security_deposits','bank_guarantees','loans'));
     }
 
     /**

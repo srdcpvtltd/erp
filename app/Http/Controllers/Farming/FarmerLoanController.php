@@ -114,4 +114,11 @@ class FarmerLoanController extends Controller
             'product_service' => $product_service,
         ]);
     }
+    public function getFarmingDetail(Request $request)
+    {
+        $farming = Farming::find($request->farming_id);
+        return response()->json([
+            'farming' => $farming
+        ]);
+    }
 }

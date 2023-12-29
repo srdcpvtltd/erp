@@ -123,7 +123,7 @@ class ProductService extends Model
         }
         $loan = FarmerLoan::where('created_by',Auth::user()->id)->count('quantity');
 
-        $totalquantity = $purchasedquantity - $posquantity;
+        $totalquantity = $purchasedquantity - $posquantity - $loan;
 
         return $totalquantity;
     }

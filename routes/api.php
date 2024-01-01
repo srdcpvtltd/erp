@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\FarmingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
@@ -22,4 +23,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('add-tracker', [ApiController::class, 'addTracker']);
     Route::post('stop-tracker', [ApiController::class, 'stopTracker']);
     Route::post('upload-photos', [ApiController::class, 'uploadImage']);
+    Route::get('countries',[FarmingController::class,'getCountries']);
+    Route::post('get_states',[FarmingController::class,'getStates']);
+    Route::post('get_districts',[FarmingController::class,'getDistricts']);   
+    Route::post('get_blocks',[FarmingController::class,'getBlocks']);   
+    Route::post('get_gram_panchyats',[FarmingController::class,'getGramPanchyats']);   
+    Route::post('get_villages',[FarmingController::class,'getVillages']);   
+    Route::resource('farming', FarmingController::class);
 });

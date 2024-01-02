@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             {{ Form::label('amount', __('Loan Amount'),['class'=>'form-label']) }}
-                            {{ Form::number('amount', '', array('class' => 'form-control','step'=>'0.01')) }}
+                            {{ Form::number('amount', 0.00, array('class' => 'form-control','step'=>'0.01')) }}
                         </div>
                     </div>
                 </div>

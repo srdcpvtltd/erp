@@ -1574,6 +1574,8 @@ Route::group(
         Route::resource('farming_registration',FarmingController::class);   
         Route::resource('guarantor',GuarantorController::class);   
         Route::get('bank_guarantee',[FarmingPaymentController::class,'bankGuarantee'])->name('bank_guarantee.index');   
+        Route::get('bank_guarantee/{id}',[FarmingPaymentController::class,'editBankGuarantee'])->name('bank_guarantee.edit');   
+        Route::get('bank_guarantee/pdf/{id}',[FarmingPaymentController::class,'pdfBankGuarantee'])->name('bank_guarantee.pdf');   
         Route::resource('payment',FarmingPaymentController::class);   
         Route::view('allotment','farmer.allotment.index')->name('allotment.index');
         Route::post('get_product_service_by_category',[FarmerLoanController::class,'getProductServiceByCategory'])->name('loan.get_product_service_by_category');   

@@ -32,7 +32,7 @@ class FarmerLoanController extends Controller
                     ->where('farmings.created_by',Auth::user()->id)
                     ->orWhere('users.supervisor_id',Auth::user()->id)
                     ->get();
-        $categories = ProductServiceCategory::where('created_by',Auth::user()->id)->get();
+        $categories = ProductServiceCategory::all();
         return view('farmer.loan.create',compact('categories','farmings'));
     }
 
@@ -69,7 +69,7 @@ class FarmerLoanController extends Controller
     public function edit($id)
     {
         $loan = FarmerLoan::find($id); 
-        $categories = ProductServiceCategory::where('created_by',Auth::user()->id)->get();
+        $categories = ProductServiceCategory::all();
         $types = ProductService::where('category_id',$loan->loan_type_id)->get();
         return view('farmer.loan.edit', compact(
             'loan',

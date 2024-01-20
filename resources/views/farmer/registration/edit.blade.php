@@ -119,6 +119,35 @@
                 }
             });
         });
+        $('#zone_id').change(function(){
+            let zone_id = $(this).val();
+            $.ajax({
+                url: "{{route('farmer.location.get_centers')}}",
+                method: 'post',
+                data: {
+                    zone_id: zone_id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(response){
+                    centers = response.centers;
+                    $('#center_id').empty();
+                    $('#center_id').append('<option  value="">Select Center</option>');
+                    for (i=0;i<centers.length;i++){
+                        $('#center_id').append('<option value="'+centers[i].id+'">'+centers[i].name+'</option>');
+                    }
+                }
+            });
+        });
+        $('input[type=radio][name="finance_category"]').on('change', function(event) {
+            var value = $(this).val();
+            if (value == "Loan") {
+                $('.bank_detail_fields').hide();
+            } else {
+                $('.bank_detail_fields').show();
+            }
+        });
     });
 
     </script>
@@ -135,6 +164,10 @@
                         <div class="form-group col-md-6">
                             {{ Form::label('name', __('Name'),['class'=>'form-label']) }}
                             {{ Form::text('name', $farming->name, array('class' => 'form-control','required'=>'required')) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('father_name', __('Father / Husband Name'),['class'=>'form-label']) }}
+                            {{ Form::text('father_name', $farming->father_name, array('class' => 'form-control','required'=>'required')) }}
                         </div>
                         <div class="form-group col-md-6">
                             {{ Form::label('mobile', __('Mobile'),['class'=>'form-label']) }}
@@ -261,6 +294,89 @@
                             <br>
                             <label><input type="radio" name="sms_mode"  {{$farming->sms_mode == 'Text' ? 'checked' :'' }} value="Text" checked> Text</label>
                             <label><input type="radio" name="sms_mode"  {{$farming->sms_mode == 'Voice' ? 'checked' :'' }} value="Voice"> Voice</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('zone_id', __('Zone'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="zone_id" id="zone_id" required placeholder="Select Country">
+                                    <option value="">{{__('Select Zone')}}</option>
+                                    @foreach($zones as $zone)
+                                        <option {{$farming->zone_id == $zone->id ? 'selected' : '' }} value="{{ $zone->id }}">{{ $zone->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('center_id', __('Center'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="center_id" id="center_id" placeholder="Select Center" required>
+                                    <option value="">{{__('Select Center')}}</option>
+                                    @foreach($centers as $center)
+                                        <option {{$farming->center_id == $center->id ? 'selected' : '' }} value="{{ $state->id }}">{{ $state->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('g_code', __('Grovers Code / G. Code'),['class'=>'form-label']) }}
+                            {{ Form::text('g_code', $center->g_code, array('class' => 'form-control','required'=>'required')) }}
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('seed_category_id', __('Zone'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="seed_category_id" id="seed_category_id" required placeholder="Select Seed Category">
+                                    <option value="">{{__('Select Seed Category')}}</option>
+                                    @foreach($seed_categories as $seed_category)
+                                        <option {{$farming->seed_category_id == $seed_category->id ? 'selected' : '' }}  value="{{ $seed_category->id }}">{{ $seed_category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('finance_category', __('Finance Category'),['class'=>'form-label']) }}
+                            <br>
+                            <label><input type="radio" name="finance_category" value="Loan" @if($farming->finance_category == 'Loan') checked @endif > Loan</label>
+                            <label><input type="radio" name="finance_category" value="Non-loan" @if($farming->finance_category == 'Non-loan') checked @endif> Non-loan</label>
+                        </div>
+                        <div class="form-group col-md-6 bank_detail_fields" @if($farming->finance_category == 'Loan') style="display:none;" @endif>
+                            {{ Form::label('account_number', __('Account Number'),['class'=>'form-label']) }}
+                            {{ Form::text('account_number', $farming->account_number, array('class' => 'form-control')) }}
+                        </div>
+                        <div class="col-md-6 bank_detail_fields" @if($farming->finance_category == 'Loan') style="display:none;" @endif>
+                            <div class="form-group">
+                                {{ Form::label('bank', __('Bank'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="bank" id="bank" required placeholder="Select Country">
+                                    <option value="">{{__('Select Bank')}}</option>
+                                    <option {{$farming->bank && $farming->bank == 'State Bank of India (SBI)' ? 'selected' : '' }} value="State Bank of India (SBI)">State Bank of India (SBI)</option>
+                                    <option {{$farming->bank && $farming->bank == 'Punjab National Bank (PNB)' ? 'selected' : '' }}  value="Punjab National Bank (PNB)">Punjab National Bank (PNB)</option>
+                                    <option {{$farming->bank && $farming->bank == 'Bank of Baroda (BOB)' ? 'selected' : '' }} value="Bank of Baroda (BOB)">Bank of Baroda (BOB)</option>
+                                    <option {{$farming->bank && $farming->bank == 'Canara Bank' ? 'selected' : '' }} value="Canara Bank">Canara Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'Union Bank of India' ? 'selected' : '' }} value="Union Bank of India">Union Bank of India</option>
+                                    <option {{$farming->bank && $farming->bank == 'HDFC Bank' ? 'selected' : '' }} value="HDFC Bank">HDFC Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'ICICI Bank' ? 'selected' : '' }} value="ICICI Bank">ICICI Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'Axis Bank' ? 'selected' : '' }} value="Axis Bank">Axis Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'Kotak Mahindra Bank' ? 'selected' : '' }} value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'IndusInd Bank' ? 'selected' : '' }} value="IndusInd Bank">IndusInd Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'Yes Bank' ? 'selected' : '' }} value="Yes Bank">Yes Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'IDBI Bank' ? 'selected' : '' }} value="IDBI Bank">IDBI Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'Central Bank of India' ? 'selected' : '' }} value="Central Bank of India">Central Bank of India</option>
+                                    <option {{$farming->bank && $farming->bank == 'Indian Bank' ? 'selected' : '' }} value="Indian Bank">Indian Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'Bank of India' ? 'selected' : '' }} value="Bank of India">Bank of India</option>
+                                    <option {{$farming->bank && $farming->bank == 'Oriental Bank of Commerce (OBC)' ? 'selected' : '' }} value="Oriental Bank of Commerce (OBC)">Oriental Bank of Commerce (OBC)</option>
+                                    <option {{$farming->bank && $farming->bank == 'Corporation Bank' ? 'selected' : '' }} value="Corporation Bank">Corporation Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'Andhra Bank' ? 'selected' : '' }} value="Andhra Bank">Andhra Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'Allahabad Bank' ? 'selected' : '' }} value="Allahabad Bank">Allahabad Bank</option>
+                                    <option {{$farming->bank && $farming->bank == 'Syndicate Bank' ? 'selected' : '' }} value="Syndicate Bank">Syndicate Bank</option>                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 bank_detail_fields" @if($farming->finance_category == 'Loan') style="display:none;" @endif>
+                            {{ Form::label('branch', __('Branch'),['class'=>'form-label']) }}
+                            {{ Form::text('branch',  $farming->branch, array('class' => 'form-control')) }}
+                        </div>
+                        <div class="form-group col-md-6 bank_detail_fields" @if($farming->finance_category == 'Loan') style="display:none;" @endif>
+                            {{ Form::label('ifsc_code', __('IFSC Code'),['class'=>'form-label']) }}
+                            {{ Form::text('ifsc_code',  $farming->ifsc_code, array('class' => 'form-control')) }}
                         </div>
                     </div>
                 </div>

@@ -50,7 +50,9 @@ use App\Http\Controllers\FormBuilderController;
 use App\Http\Controllers\Farming\FarmingController;
 use App\Http\Controllers\Farming\FarmerLoanController;
 use App\Http\Controllers\Farming\FarmingPaymentController;
+use App\Http\Controllers\Farming\FarmerRegistrationController;
 use App\Http\Controllers\Farming\GuarantorController;
+use App\Http\Controllers\Farming\SeedCategoryController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\GoalTrackingController;
 use App\Http\Controllers\GoalTypeController;
@@ -72,11 +74,13 @@ use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\LoanOptionController;
 use App\Http\Controllers\Location\BlockController;
+use App\Http\Controllers\Location\CenterController;
 use App\Http\Controllers\Location\CountryController;
 use App\Http\Controllers\Location\DistrictController;
 use App\Http\Controllers\Location\GramPanchyatController;
 use App\Http\Controllers\Location\StateController;
 use App\Http\Controllers\Location\VillageController;
+use App\Http\Controllers\Location\ZoneController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MercadoPaymentController;
 use App\Http\Controllers\MolliePaymentController;
@@ -1553,6 +1557,8 @@ Route::group(
         Route::resource('block',BlockController::class);   
         Route::resource('gram_panchyat',GramPanchyatController::class);
         Route::resource('village',VillageController::class);
+        Route::resource('zone',ZoneController::class);
+        Route::resource('center',CenterController::class);
     }
 );
 Route::group(
@@ -1570,6 +1576,7 @@ Route::group(
         Route::post('location/get_blocks',[FarmingController::class,'getBlocks'])->name('location.get_blocks');   
         Route::post('location/get_gram_panchyats',[FarmingController::class,'getGramPanchyats'])->name('location.get_gram_panchyats');   
         Route::post('location/get_villages',[FarmingController::class,'getVillages'])->name('location.get_villages');   
+        Route::post('location/get_centers',[FarmingController::class,'getCenters'])->name('location.get_centers');   
         Route::get('farming_registration/validate/{id}',[FarmingController::class,'validateProfile'])->name('farming_registration.validate');   
         Route::resource('farming_registration',FarmingController::class);   
         Route::resource('guarantor',GuarantorController::class);   
@@ -1584,6 +1591,7 @@ Route::group(
         Route::resource('loan',FarmerLoanController::class);   
         Route::get('reimbursement/create',[FarmingPaymentController::class,'reimbursementCreate'])->name('reimbursement.create');   
         Route::get('reimbursement',[FarmingPaymentController::class,'reimbursement'])->name('reimbursement.index');   
+        Route::resource('seed_category',SeedCategoryController::class);   
     }
 );
 Route::get('migrate', function() {

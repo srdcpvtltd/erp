@@ -5,14 +5,17 @@ namespace App\Http\Controllers\Farming;
 use App\Models\Farming;
 use App\Http\Controllers\Controller;
 use App\Models\Block;
+use App\Models\Center;
 use App\Models\Country;
 use App\Models\District;
 use App\Models\FarmerLoan;
 use App\Models\FarmingPayment;
 use App\Models\GramPanchyat;
 use App\Models\Guarantor;
+use App\Models\SeedCategory;
 use App\Models\State;
 use App\Models\Village;
+use App\Models\Zone;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +39,9 @@ class FarmingController extends Controller
     public function create()
     {
         $countries = Country::all();
-        return view('farmer.registration.create',compact('countries'));
+        $seed_categories = SeedCategory::all();
+        $zones = Zone::all();
+        return view('farmer.registration.create',compact('countries','zones','seed_categories'));
     }
 
     /**
@@ -47,6 +52,7 @@ class FarmingController extends Controller
         try{
             $this->validate($request,[
                 'name' => 'required',
+                'father_name' => 'required',
                 'mobile' => 'required',
                 'country_id' => 'required',
                 'state_id' => 'required',
@@ -61,6 +67,9 @@ class FarmingController extends Controller
                 'language' => 'required',
                 'sms_mode' => 'required',
                 'created_by' => 'required',
+                'zone_id' => 'required',
+                'center_id' => 'required',
+                'seed_category_id' => 'required',
             ]);
             Farming::create($request->all());
             return redirect()->to(route('farmer.farming_registration.index'))->with('success', 'Farming Added Successfully.');
@@ -97,6 +106,9 @@ class FarmingController extends Controller
         $blocks = Block::where('district_id',$farming->district_id)->get();
         $gram_panchyats = GramPanchyat::where('block_id',$farming->block_id)->get();
         $villages = Village::where('gram_panchyat_id',$farming->gram_panchyat_id)->get();
+        $seed_categories = SeedCategory::all();
+        $zones = Zone::all();
+        $centers = Center::where('zone_id',$farming->zone_id)->get();
         return view('farmer.registration.edit', compact(
             'farming',
             'countries',
@@ -105,6 +117,9 @@ class FarmingController extends Controller
             'blocks',
             'gram_panchyats',
             'villages',
+            'seed_categories',
+            'zones',
+            'centers',
         ));
     }
 
@@ -160,6 +175,13 @@ class FarmingController extends Controller
         $villages = Village::where('gram_panchyat_id',$request->gram_panchyat_id)->get();
         return response()->json([
             'villages' => $villages,
+        ]);
+    }
+    public function getCenters(Request $request)
+    {
+        $centers = Center::where('zone_id',$request->zone_id)->get();
+        return response()->json([
+            'centers' => $centers,
         ]);
     }
 

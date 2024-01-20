@@ -924,6 +924,11 @@
                                     <span class="dash-micon"><i class="ti ti-template"></i></span>
                                     <span class="dash-mtext">{{ __('Email Template') }}</span></a>
                             </li>
+                            <li class="dash-item dash-hasmenu {{ Request::segment(1) == 'seed_category' || Request::route()->getName() == 'farmer.seed_category.index' ? ' active dash-trigger' : 'collapsed' }}">
+                                <a href="{{ route('farmer.seed_category.index') }}" class="dash-link">
+                                    <span class="dash-micon"><i class="ti ti-template"></i></span>
+                                    <span class="dash-mtext">{{ __('Seed Category') }}</span></a>
+                            </li>
 
                             <li class="dash-item dash-hasmenu {{ Request::is('location*')?' active dash-trigger':''}}">
                                 <a href="#!" class="dash-link"><span class="dash-micon"><i class="ti ti-location"></i></span><span class="dash-mtext">{{__('Location')}}</span><span class="dash-arrow"><i data-feather="chevron-right"></i></span></a>
@@ -939,6 +944,10 @@
                                     <li class="dash-item {{ (Request::route()->getName() == 'location.gram_panchyat.index') ? ' active' : '' }}"><a class="dash-link" href="{{ route('location.gram_panchyat.index') }}">{{__('Gram Panchyat')}}</a>
                                     </li>
                                     <li class="dash-item {{ (Request::route()->getName() == 'location.village.index') ? ' active' : '' }}"><a class="dash-link" href="{{ route('location.village.index') }}">{{__('Village')}}</a>
+                                    </li>
+                                    <li class="dash-item {{ (Request::route()->getName() == 'location.zone.index') ? ' active' : '' }}"><a class="dash-link" href="{{ route('location.zone.index') }}">{{__('Zone')}}</a>
+                                    </li>
+                                    <li class="dash-item {{ (Request::route()->getName() == 'location.center.index') ? ' active' : '' }}"><a class="dash-link" href="{{ route('location.center.index') }}">{{__('Center')}}</a>
                                     </li>
                                 </ul>
                             </li>

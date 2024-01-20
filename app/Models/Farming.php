@@ -31,6 +31,16 @@ class Farming extends Model
         'post_office',
         'police_station',
         'registration_no',
+        'father_name',
+        'zone_id',
+        'center_id',
+        'g_code',
+        'seed_category_id',
+        'finance_category',
+        'account_number',
+        'bank',
+        'branch',
+        'ifsc_code',
     ];
 
     public function country()
@@ -61,5 +71,20 @@ class Farming extends Model
     public function village()
     {
         return $this->belongsTo(Village::class,'village_id');
+    } 
+
+    public function zone()
+    {
+        return $this->belongsTo(Zone::class,'zone_id');
+    }
+
+    public function center()
+    {
+        return $this->belongsTo(Center::class,'center_id');
+    }
+
+    public function seed_category()
+    {
+        return $this->belongsTo(SeedCategory::class,'seed_category_id');
     }
 }

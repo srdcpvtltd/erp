@@ -348,13 +348,13 @@
                             {{ Form::label('ifsc_code', __('IFSC Code'),['class'=>'form-label']) }}
                             {{ Form::text('ifsc_code', '', array('class' => 'form-control')) }}
                         </div>
-                                                <div class="form-group col-md-6">
+                          <div class="form-group col-md-3">
                             {{ Form::label('language', __('Language'),['class'=>'form-label']) }}
                             <br>
                             <label><input type="radio" name="language" value="Hindi" checked> Hindi</label>
                             <label><input type="radio" name="language" value="English"> English</label>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             {{ Form::label('sms_mode', __('Sms Mode'),['class'=>'form-label']) }}
                             <br>
                             <label><input type="radio" name="sms_mode" value="Text" checked> Text</label>

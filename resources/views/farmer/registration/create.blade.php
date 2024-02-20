@@ -261,6 +261,10 @@
                             {{ Form::text('registration_no',  '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
                         <div class="form-group col-md-6">
+                            {{ Form::label('g_code', __('Growers Code / G. Code'),['class'=>'form-label']) }}
+                            {{ Form::text('g_code', '', array('class' => 'form-control','required'=>'required')) }}
+                        </div>
+                        <div class="form-group col-md-6">
                             {{ Form::label('age', __('Age'),['class'=>'form-label']) }}
                             {{ Form::number('age', '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
@@ -300,10 +304,7 @@
                             <label><input type="radio" name="sms_mode" value="Voice"> Voice</label>
                         </div>
                         
-                        <div class="form-group col-md-6">
-                            {{ Form::label('g_code', __('Grovers Code / G. Code'),['class'=>'form-label']) }}
-                            {{ Form::text('g_code', '', array('class' => 'form-control','required'=>'required')) }}
-                        </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ Form::label('seed_category_id', __('Zone'),['class'=>'form-label']) }}

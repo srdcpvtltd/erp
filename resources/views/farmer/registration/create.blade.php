@@ -237,6 +237,25 @@
                             {{ Form::label('police_station', __('Police Station'),['class'=>'form-label']) }}
                             {{ Form::text('police_station',  '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('zone_id', __('Zone'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="zone_id" id="zone_id" required placeholder="Select Country">
+                                    <option value="">{{__('Select Zone')}}</option>
+                                    @foreach($zones as $zone)
+                                        <option value="{{ $zone->id }}">{{ $zone->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('center_id', __('Center'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="center_id" id="center_id" placeholder="Select Center" required>
+                                    <option value="">{{__('Select Center')}}</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group col-md-6">
                             {{ Form::label('registration_no', __('Registration No.'),['class'=>'form-label']) }}
                             {{ Form::text('registration_no',  '', array('class' => 'form-control','required'=>'required')) }}
@@ -280,25 +299,7 @@
                             <label><input type="radio" name="sms_mode" value="Text" checked> Text</label>
                             <label><input type="radio" name="sms_mode" value="Voice"> Voice</label>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('zone_id', __('Zone'),['class'=>'form-label']) }}
-                                <select class="form-control select" name="zone_id" id="zone_id" required placeholder="Select Country">
-                                    <option value="">{{__('Select Zone')}}</option>
-                                    @foreach($zones as $zone)
-                                        <option value="{{ $zone->id }}">{{ $zone->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('center_id', __('Center'),['class'=>'form-label']) }}
-                                <select class="form-control select" name="center_id" id="center_id" placeholder="Select Center" required>
-                                    <option value="">{{__('Select Center')}}</option>
-                                </select>
-                            </div>
-                        </div>
+                        
                         <div class="form-group col-md-6">
                             {{ Form::label('g_code', __('Grovers Code / G. Code'),['class'=>'form-label']) }}
                             {{ Form::text('g_code', '', array('class' => 'form-control','required'=>'required')) }}

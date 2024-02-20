@@ -307,7 +307,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ Form::label('seed_category_id', __('Zone'),['class'=>'form-label']) }}
+                                {{ Form::label('seed_category_id', __('Seed Category'),['class'=>'form-label']) }}
                                 <select class="form-control select" name="seed_category_id" id="seed_category_id" required placeholder="Select Seed Category">
                                     <option value="">{{__('Select Seed Category')}}</option>
                                     @foreach($seed_categories as $seed_category)

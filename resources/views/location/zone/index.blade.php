@@ -29,6 +29,7 @@
                             <thead>
                             <tr>
                                 <th>{{__('Name')}}</th>
+                                <th>{{__('Zone Number')}}</th>
                                 <th>{{__('Action')}}</th>
                             </tr>
                             </thead>
@@ -36,6 +37,7 @@
                             @foreach ($zones as $zone)
                                 <tr class="font-style">
                                     <td>{{ $zone->name}}</td>
+                                    <td>{{ $zone->zone_number}}</td>
                                     <td class="Action">
                                         <div class="action-btn bg-info ms-2">
                                             <a href="#" class="mx-3 btn btn-sm  align-items-center" data-url="{{ route('location.zone.edit',$zone->id) }}" data-ajax-popup="true"  data-size="lg " data-bs-toggle="tooltip" title="{{__('Edit')}}"  data-title="{{__('Edit Zone')}}">

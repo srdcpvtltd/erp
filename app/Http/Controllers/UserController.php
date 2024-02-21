@@ -39,12 +39,13 @@ class UserController extends Controller
         $user = \Auth::user();
         $roles = Role::where('created_by', '=', $user->creatorId())->where('name', '!=', 'client')->get()->pluck('name', 'id');
         $supervisor_role = Role::where('name','Superviser')->first();
-        if($supervisor_role)
-        {
-            $supervisors = User::where('type','Superviser')->get();
-        }else{
-            $supervisors = [];
-        }
+        $supervisors = User::all();
+        // if($supervisor_role)
+        // {
+        //     $supervisors = User::where('type','Superviser')->get();
+        // }else{
+        //     $supervisors = [];
+        // }
         if (\Auth::user()->can('create user')) {
             return view('user.create', compact('roles', 'customFields','supervisors'));
         } else {
@@ -119,12 +120,12 @@ class UserController extends Controller
             $user->customField = CustomField::getData($user, 'user');
             $customFields = CustomField::where('created_by', '=', \Auth::user()->creatorId())->where('module', '=', 'user')->get();
             $supervisor_role = Role::where('name','Superviser')->first();
-            if($supervisor_role)
-            {
-                $supervisors = User::where('type','Superviser')->get();
-            }else{
-                $supervisors = [];
-            }
+            // if($supervisor_role)
+            // {
+                $supervisors = User::all();
+            // }else{
+            //     $supervisors = [];
+            // }
             return view('user.edit', compact('user', 'roles', 'customFields','supervisors','supervisor_role'));
         } else {
             return redirect()->back();

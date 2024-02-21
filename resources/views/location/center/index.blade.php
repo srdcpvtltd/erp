@@ -29,6 +29,7 @@
                             <thead>
                             <tr>
                                 <th>{{__('Name')}}</th>
+                                <th>{{__('Center Number')}}</th>
                                 <th>{{__('Zone')}}</th>
                                 <th>{{__('Action')}}</th>
                             </tr>
@@ -37,6 +38,7 @@
                             @foreach ($centers as $center)
                                 <tr class="font-style">
                                     <td>{{ $center->name}}</td>
+                                    <td>{{ $center->center_number}}</td>
                                     <td>{{ @$center->zone->name}}</td>
                                     <td class="Action">
                                         <div class="action-btn bg-info ms-2">

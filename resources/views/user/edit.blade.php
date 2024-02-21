@@ -36,8 +36,8 @@
             {{-- @if(Auth::user()->type == 'Supervisor') --}}
             <div class="form-group col-md-6">
                 {{ Form::label('supervisor_id', __('Supervisor'),['class'=>'form-label']) }}
-                <select class="form-control select" name="supervisor_id" id="supervisor_id" required placeholder="Select Supervisor">
-                    <option value="">{{__('Select Supervisor')}}</option>
+                <select class="form-control select" name="supervisor_id" id="supervisor_id" placeholder="Select">
+                    <option value="">{{__('Select')}}</option>
                     @foreach($supervisors as $key => $supervisor)
                         <option {{$user->supervisor_id && $user->supervisor_id == $supervisor->id ? 'selected' : ''}} value="{{ $supervisor->id }}">{{ $supervisor->name }}</option>
                     @endforeach

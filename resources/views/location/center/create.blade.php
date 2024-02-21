@@ -19,6 +19,10 @@
             {{ Form::text('name', '', array('class' => 'form-control','required'=>'required')) }}
         </div>
         <div class="form-group col-md-6">
+            {{ Form::label('center_number', __('Center Number'),['class'=>'form-label']) }}
+            {{ Form::text('center_number', '', array('class' => 'form-control','required'=>'required')) }}
+        </div>
+        <div class="form-group col-md-6">
             {{ Form::label('zone_id', __('Zones'),['class'=>'form-label']) }}<span class="text-danger">*</span>
             {{ Form::select('zone_id',$zones,null, array('class' => 'form-control select','required'=>'required')) }}
         </div>

@@ -9,7 +9,7 @@ class Center extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','zone_id'];
+    protected $fillable = ['name','zone_id','center_number'];
 
     public function zone()
     {

@@ -22,6 +22,9 @@ class FarmingPayment extends Model
         'type',
         'created_by',
         'bank',
+        'loan_account_number',
+        'ifsc',
+        'branch',
     ];
 
     public function farming()

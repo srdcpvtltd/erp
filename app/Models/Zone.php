@@ -9,6 +9,6 @@ class Zone extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','zone_number'];
 
 }

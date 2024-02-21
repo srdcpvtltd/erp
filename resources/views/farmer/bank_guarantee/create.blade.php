@@ -73,6 +73,18 @@
                             {{ Form::label('amount', __('Loan Amount'),['class'=>'form-label']) }}
                             {{ Form::number('amount', 0.00, array('class' => 'form-control','step'=>'0.01')) }}
                         </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('loan_account_number', __('Loan Account No'),['class'=>'form-label']) }}
+                            {{ Form::text('loan_account_number','', array('class' => 'form-control')) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('ifsc', __('IFSC'),['class'=>'form-label']) }}
+                            {{ Form::text('ifsc','', array('class' => 'form-control')) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('branch', __('Branch'),['class'=>'form-label']) }}
+                            {{ Form::text('branch','', array('class' => 'form-control')) }}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,9 @@
             <th>{{__('Farmer Name')}}</th>
             <th>{{__('Farmer ID#')}}</th>
             <th>{{__('Bank')}}</th>
+            <th>{{__('Loan Account No.')}}</th>
+            <th>{{__('IFSC')}}</th>
+            <th>{{__('Branch')}}</th>
             <th>{{__('Loan Disbursement Date')}}</th>
             <th>{{__('Loan Amount')}}</th>
             <th>{{__('Action')}}</th>
@@ -18,6 +21,9 @@
                 <td>{{ @$bank_guarantee->farming->name}}</td>
                 <td>{{ @$bank_guarantee->farming->farmer_id}}</td>
                 <td>{{ $bank_guarantee->bank}}</td>
+                <td>{{ $bank_guarantee->loan_account_number}}</td>
+                <td>{{ $bank_guarantee->ifsc}}</td>
+                <td>{{ $bank_guarantee->branch}}</td>
                 <td>{{ $bank_guarantee->date }}</td>
                 <td>{{ $bank_guarantee->amount }}</td>
                 <td class="Action">

@@ -34,9 +34,9 @@
                 @enderror
             </div>
             <div class="form-group col-md-6">
-                {{ Form::label('supervisor_id', __('Supervisor'),['class'=>'form-label']) }}
-                <select class="form-control select" name="supervisor_id" id="supervisor_id" required placeholder="Select Supervisor">
-                    <option value="">{{__('Select Supervisor')}}</option>
+                {{ Form::label('supervisor_id', __('Reporting To'),['class'=>'form-label']) }}
+                <select class="form-control select" name="supervisor_id" id="supervisor_id" placeholder="Select">
+                    <option value="">{{__('Select')}}</option>
                     @foreach($supervisors as $key => $supervisor)
                         <option value="{{ $supervisor->id }}">{{ $supervisor->name }}</option>
                     @endforeach

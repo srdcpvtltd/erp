@@ -26,6 +26,16 @@
             @enderror
         </div>
         <div class="form-group col-md-6">
+
+            {{ Form::label('center_number', __('Center Number'),['class'=>'form-label']) }}
+            {{ Form::text('center_number', null, array('class' => 'form-control','required'=>'required')) }}
+            @error('center_number')
+            <small class="invalid-name" role="alert">
+                <strong class="text-danger">{{ $message }}</strong>
+            </small>
+            @enderror
+        </div>
+        <div class="form-group col-md-6">
             {{ Form::label('zone_id', __('Zones'),['class'=>'form-label']) }}<span class="text-danger">*</span>
             {{ Form::select('zone_id',$zones,null, array('class' => 'form-control select','required'=>'required')) }}
         </div>

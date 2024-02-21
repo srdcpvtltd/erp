@@ -71,6 +71,12 @@ class FarmingController extends Controller
                 'center_id' => 'required',
                 'seed_category_id' => 'required',
             ]);
+            $zone = Zone::find($request->zone_id);
+            $center = Center::find($request->center_id);
+            $existingFarmingProfiles = Farming::where('zone_id',$zone->id)->count() + 1;
+            $request->merge([
+                'g_code' => @$zone->zone_number.'/'.@$center->center_number.'/000'.$existingFarmingProfiles
+            ]);
             Farming::create($request->all());
             return redirect()->to(route('farmer.farming_registration.index'))->with('success', 'Farming Added Successfully.');
         }catch (Exception $e)
@@ -129,6 +135,25 @@ class FarmingController extends Controller
     public function update(Request $request,$id)
     {
         $farming = Farming::find($id);
+        if($request->zone_id != $farming->zone_id)
+        {
+            $zone = Zone::find($request->zone_id);
+            $center = Center::find($request->center_id);
+            $existingFarmingProfiles = Farming::where('zone_id',$zone->id)->count() + 1;
+            $request->merge([
+                'g_code' => $zone->zone_number.'/'.$center->center_number.'/000'.$existingFarmingProfiles
+            ]);
+        }
+        if($request->center_id != $farming->center_id)
+        {
+            $zone = Zone::find($request->zone_id);
+            $center = Center::find($request->center_id);
+            $existingFarmingProfiles = Farming::where('zone_id',$zone->id)->count() + 1;
+            $request->merge([
+                'g_code' => $zone->zone_number.'/'.$center->center_number.'/000'.$existingFarmingProfiles
+            ]);
+        }
+
         $farming->update($request->all());
         return redirect()->back()->with('success', 'Farming Updated Successfully.'); 
     }

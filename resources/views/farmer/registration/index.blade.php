@@ -30,7 +30,7 @@
                             <thead>
                             <tr>
                                 <th>{{__('Name')}}</th>
-                                {{-- <th>{{__('Email')}}</th> --}}
+                                <th>{{__('G. Code')}}</th>
                                 <th>{{__('Mobile')}}</th>
                                 <th>{{__('Age')}}</th>
                                 <th>{{__('Gender')}}</th>
@@ -46,7 +46,7 @@
                             @foreach ($farmings as $farming)
                                 <tr class="font-style">
                                     <td>{{ $farming->name}}</td>
-                                    {{-- <td>{{ $farming->email}}</td> --}}
+                                    <td>{{ $farming->g_code}}</td>
                                     <td>{{ $farming->mobile}}</td>
                                     <td>{{ $farming->age}}</td>
                                     <td>{{ $farming->gender}}</td>

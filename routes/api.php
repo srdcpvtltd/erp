@@ -30,6 +30,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('get_blocks',[FarmingController::class,'getBlocks']);   
     Route::post('get_gram_panchyats',[FarmingController::class,'getGramPanchyats']);   
     Route::post('get_villages',[FarmingController::class,'getVillages']);   
+    Route::get('get_seed_categories',[FarmingController::class,'getSeedCategories']);   
+    Route::get('get_zones',[FarmingController::class,'getZones']);   
+    Route::post('get_centers',[FarmingController::class,'getCenter']);   
     // Farming Regisration Api
-    Route::resource('farming', FarmingController::class);
+    Route::resource('farming', FarmingController::class)->only(['index']);
+    Route::post('farming/create', [FarmingController::class,'store']);
 });

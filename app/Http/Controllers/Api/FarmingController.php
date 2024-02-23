@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Models\Farming;
 use App\Http\Controllers\Controller;
 use App\Models\Block;
+use App\Models\Center;
 use App\Models\Country;
 use App\Models\District;
 use App\Models\GramPanchyat;
+use App\Models\SeedCategory;
 use App\Models\State;
 use App\Models\Village;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,6 +53,7 @@ class FarmingController extends Controller
         try {
             $this->validate($request,[
                 'name' => 'required',
+                'father_name' => 'required',
                 'mobile' => 'required',
                 'country_id' => 'required',
                 'state_id' => 'required',
@@ -64,6 +68,15 @@ class FarmingController extends Controller
                 'language' => 'required',
                 'sms_mode' => 'required',
                 'created_by' => 'required',
+                'zone_id' => 'required',
+                'center_id' => 'required',
+                'seed_category_id' => 'required',
+            ]);
+            $zone = Zone::find($request->zone_id);
+            $center = Center::find($request->center_id);
+            $existingFarmingProfiles = Farming::where('zone_id',$zone->id)->count() + 1;
+            $request->merge([
+                'g_code' => @$zone->zone_number.'/'.@$center->center_number.'/000'.$existingFarmingProfiles
             ]);
             $farming = Farming::create($request->all());
 
@@ -234,6 +247,48 @@ class FarmingController extends Controller
             $villages = Village::where('gram_panchyat_id',$request->gram_panchyat_id)->get();
             return response([
                 "villages" => $villages
+            ], 200);
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function getZones()
+    {
+        try {
+            $zones = Zone::all();
+            return response([
+                "zones" => $zones
+            ], 200);
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function getSeedCategories()
+    {
+        try {
+            $seed_categories = SeedCategory::all();
+            return response([
+                "seed_categories" => $seed_categories
+            ], 200);
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function getCenter(Request $request)
+    {
+        try {
+            $this->validate($request,[
+                'zone_id' => 'required',
+            ]);
+            $centers = Center::where('zone_id',$request->zone_id)->get();
+            return response([
+                "centers" => $centers
             ], 200);
         } catch (\Exception $e) {
             return response([

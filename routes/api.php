@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\FarmingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +37,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Farming Regisration Api
     Route::resource('farming', FarmingController::class)->only(['index']);
     Route::post('farming/create', [FarmingController::class,'store']);
+    // Employee Setup Apis
+    Route::get('employees', [EmployeeController::class,'index']);
+    Route::get('employees/get_documents', [EmployeeController::class,'getDocuments']);
+    Route::get('employees/get_branches', [EmployeeController::class,'getBranches']);
+    Route::get('employees/get_departments', [EmployeeController::class,'getDepartments']);
+    Route::get('employees/get_designations', [EmployeeController::class,'getDesignations']);
+    Route::get('employees/get_employees', [EmployeeController::class,'getEmployees']);
+    Route::get('employees/get_employee_id', [EmployeeController::class,'getEmployeeID']);
+    Route::get('employees/{id}', [EmployeeController::class,'getEmployee']);
+    Route::post('employees/store', [EmployeeController::class,'store']);
 });

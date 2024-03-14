@@ -25,11 +25,11 @@ class EmployeeController extends Controller
             {
                 if(Auth::user()->type == 'Employee')
                 {
-                    $employees = Employee::where('user_id', '=', Auth::user()->id)->with(['branch','department','designation'])->get();
+                    $employees = Employee::where('user_id', '=', Auth::user()->id)->with(['branch','department','designation','documents','salaryType'])->get();
                 }
                 else
                 {
-                    $employees = Employee::where('created_by', Auth::user()->creatorId())->with(['branch','department','designation'])->get();
+                    $employees = Employee::where('created_by', Auth::user()->creatorId())->with(['branch','department','designation','documents','salaryType'])->get();
                 }
                 return response([
                     "employees" => $employees,
@@ -269,6 +269,139 @@ class EmployeeController extends Controller
             return response([
                 "employee_id" => $this->getEmployeeNumber(),
             ], 200);
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    } 
+    public function destroy($id)
+    {
+        try {  
+            if(Auth::user()->can('delete employee'))
+            {
+                $employee      = Employee::findOrFail($id);
+                $user          = User::where('id',$employee->user_id)->first();
+                $emp_documents = EmployeeDocument::where('employee_id', $employee->employee_id)->get();
+                
+                $employee->delete();
+                if($user)
+                    $user->delete();
+                $dir = storage_path('uploads/document/');
+                foreach($emp_documents as $emp_document)
+                {
+                    $emp_document->delete();
+                    if(!empty($emp_document->document_value))
+                    {
+                        unlink($dir . $emp_document->document_value);
+                    }
+                }
+                return response([
+                    "success" => true,
+                    "message" => "Employee successfully deleted.",
+                ], 200);
+            }
+            else
+            {
+                return response([
+                    "error" => "Permission denied."
+                ], 500);
+            }     
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
+
+    }
+    public function update(Request $request)
+    {
+        try {  
+            if(Auth::user()->can('edit employee'))
+            {
+                $this->validate($request,[
+                    'employee_id' => 'required',
+                    'name' => 'required',
+                    'dob' => 'required',
+                    'gender' => 'required',
+                    'phone' => 'required|numeric',
+                    'address' => 'required',
+                ]);
+                $employee = Employee::findOrFail($request->employee_id);
+                if($request->document)
+                {
+                    foreach($request->document as $key => $document)
+                    {
+                        if(!empty($document))
+                        {
+                            $filenameWithExt = $request->file('document')[$key]->getClientOriginalName();
+                            $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                            $extension       = $request->file('document')[$key]->getClientOriginalExtension();
+                            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+
+                            $dir             = 'uploads/document/';
+                            $image_path = $dir . $filenameWithExt;
+
+                            if(File::exists($image_path))
+                            {
+                                File::delete($image_path);
+                            }
+                            $path = Utility::upload_coustom_file($request,'document',$fileNameToStore,$dir,$key,[]);
+
+                            if($path['flag'] == 1){
+                                $url = $path['url'];
+                            }else{
+                                return response([
+                                    "error" => $path['msg']
+                                ], 500);
+                            }
+
+                            $employee_document = EmployeeDocument::where('employee_id', $employee->employee_id)->where('document_id', $key)->first();
+                            if(!empty($employee_document))
+                            {
+
+                                $employee_document->document_value = $fileNameToStore;
+                                $employee_document->save();
+                            }
+                            else
+                            {
+
+                                $employee_document                 = new EmployeeDocument();
+                                $employee_document->employee_id    = $employee->employee_id;
+                                $employee_document->document_id    = $key;
+
+                                $employee_document->document_value = $fileNameToStore;
+                                $employee_document->created_by = Auth::user()->creatorId();
+
+                                $employee_document->save();
+                            }
+
+                        }
+                    }
+                }
+
+                $employee = Employee::findOrFail($request->employee_id);
+                $input    = $request->all();
+                $employee->fill($input)->save();
+                $employee = Employee::find($request->employee_id);
+                $user = User::where('id',$employee->user_id)->first();
+                if(!empty($user)){
+                    $user->name = $employee->name;
+                    $user->email = $employee->email;
+                    $user->save();
+                }
+                return response([
+                    "success" => true,
+                    "message" => "Employee successfully updated.",
+                ], 200);
+
+            }
+            else
+            {
+                return response([
+                    "error" => "Permission denied."
+                ], 500);
+            }
         } catch (\Exception $e) {
             return response([
                 "error" => $e->getMessage()

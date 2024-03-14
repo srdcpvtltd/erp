@@ -3309,6 +3309,10 @@ class Utility extends Model
             'create farmer reimbursement',
             'edit farmer reimbursement',
             'delete farmer reimbursement',
+            'manage farmer detail',
+            'create farmer detail',
+            'edit farmer detail',
+            'delete farmer detail',
         ];
         foreach($arrPermissions as $ap)
         {
@@ -3385,6 +3389,10 @@ class Utility extends Model
             'create farmer reimbursement',
             'edit farmer reimbursement',
             'delete farmer reimbursement',
+            'manage farmer detail',
+            'create farmer detail',
+            'edit farmer detail',
+            'delete farmer detail',
         ];
         foreach($companyNewPermission as $op)
         {

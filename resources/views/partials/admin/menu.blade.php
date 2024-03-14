@@ -828,6 +828,10 @@
                                     <li class="dash-item {{ Request::is('farmer/reimbursement*') ? ' active' : '' }}"><a class="dash-link" href="{{ route('farmer.reimbursement.index') }}">{{__('Reimbursement')}}</a>
                                     </li>
                                     @endif
+                                    @if(Gate::check('manage farmer detail'))
+                                    <li class="dash-item {{ Request::is('farmer/farming_detail*') ? ' active' : '' }}"><a class="dash-link" href="{{ route('farmer.farming_detail.index') }}">{{__('Farmer Detail')}}</a>
+                                    </li>
+                                    @endif
                                 </ul>
                             </li>
                         @endif

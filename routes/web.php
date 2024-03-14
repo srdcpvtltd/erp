@@ -50,7 +50,7 @@ use App\Http\Controllers\FormBuilderController;
 use App\Http\Controllers\Farming\FarmingController;
 use App\Http\Controllers\Farming\FarmerLoanController;
 use App\Http\Controllers\Farming\FarmingPaymentController;
-use App\Http\Controllers\Farming\FarmerRegistrationController;
+use App\Http\Controllers\Farming\FarmingDetailController;
 use App\Http\Controllers\Farming\GuarantorController;
 use App\Http\Controllers\Farming\SeedCategoryController;
 use App\Http\Controllers\GoalController;
@@ -1592,6 +1592,7 @@ Route::group(
         Route::get('reimbursement/create',[FarmingPaymentController::class,'reimbursementCreate'])->name('reimbursement.create');   
         Route::get('reimbursement',[FarmingPaymentController::class,'reimbursement'])->name('reimbursement.index');   
         Route::resource('seed_category',SeedCategoryController::class);   
+        Route::resource('farming_detail',FarmingDetailController::class);   
     }
 );
 Route::get('migrate', function() {

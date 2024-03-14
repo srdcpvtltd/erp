@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\AllowanceController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\FarmingController;
+use App\Http\Controllers\Api\SalaryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
@@ -45,6 +47,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('employees/get_designations', [EmployeeController::class,'getDesignations']);
     Route::get('employees/get_employees', [EmployeeController::class,'getEmployees']);
     Route::get('employees/get_employee_id', [EmployeeController::class,'getEmployeeID']);
-    Route::get('employees/{id}', [EmployeeController::class,'getEmployee']);
+    Route::get('employees/detail/{id}', [EmployeeController::class,'getEmployee']);
+    Route::get('employees/destroy/{id}', [EmployeeController::class,'destroy']);
+    Route::post('employees/update', [EmployeeController::class,'update']);
     Route::post('employees/store', [EmployeeController::class,'store']);
+    // Employee Salry Setup
+    Route::get('employees/get_payslip_types', [SalaryController::class,'getPayslipTypes']);
+    Route::post('employees/update_basic_salary', [SalaryController::class,'updateBasicSalary']);
+    // Employee Allowance Setup
+    Route::get('employees/get_allowance_option', [AllowanceController::class,'getAllowanceOptions']);
+    Route::get('employees/get_allowance_types', [AllowanceController::class,'getAllowanceTypes']);
+    Route::get('employees/get_allowances', [AllowanceController::class,'getAllowances']);
+    Route::post('employees/store_allowance', [AllowanceController::class,'store']);
+
 });

@@ -1163,11 +1163,11 @@
                 </div>
                 <div class="tab-pane fade" id="farmer" role="tabpanel" aria-labelledby="pills-profile-tab">
                     @php
-                        $modules=['farmer registration','farmer guarantor','farmer security deposit','farmer loan','farmer reimbursement'];
+                        $modules=['farmer registration','farmer guarantor','farmer security deposit','farmer loan','farmer reimbursement','farmer detail'];
                     @endphp
                     <div class="col-md-12">
                         <div class="form-group">
-                            @if(!empty($permissions))
+                            @if(!empty($permissions)),
                                 <h6 class="my-3">{{__('Assign Farmer related Permission to Roles')}}</h6>
                                 <table class="table table-striped mb-0" id="dataTable-1">
                                     <thead>

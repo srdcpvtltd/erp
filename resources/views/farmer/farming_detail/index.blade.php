@@ -63,21 +63,20 @@
                                     </td> --}}
                                     <td class="Action">
                                        
-                                            @can('edit farmer detail')
-                                            <div class="action-btn bg-info ms-2">
-                                                <a href="{{route('farmer.farming_detail.edit',$farming_detail->id)}}" class="mx-3 btn btn-sm  align-items-center">
-                                                    <i class="ti ti-pencil text-white"></i>
-                                                </a>
-                                            </div>
-                                            @endcan
-                                            @can('delete farmer detail')
-                                            <div class="action-btn bg-danger ms-2">
-                                                {!! Form::open(['method' => 'DELETE', 'route' => ['farmer.farming_detail.destroy', $farming_detail->id],'id'=>'delete-form-'.$farming_detail->id]) !!}
-                                                <a href="#" class="mx-3 btn btn-sm  align-items-center bs-pass-para" data-bs-toggle="tooltip" title="{{__('Delete')}}" ><i class="ti ti-trash text-white"></i></a>
-                                                {!! Form::close() !!}
-                                            </div>
-                                            @endcan
-                                        @endif
+                                        @can('edit farmer detail')
+                                        <div class="action-btn bg-info ms-2">
+                                            <a href="{{route('farmer.farming_detail.edit',$farming_detail->id)}}" class="mx-3 btn btn-sm  align-items-center">
+                                                <i class="ti ti-pencil text-white"></i>
+                                            </a>
+                                        </div>
+                                        @endcan
+                                        @can('delete farmer detail')
+                                        <div class="action-btn bg-danger ms-2">
+                                            {!! Form::open(['method' => 'DELETE', 'route' => ['farmer.farming_detail.destroy', $farming_detail->id],'id'=>'delete-form-'.$farming_detail->id]) !!}
+                                            <a href="#" class="mx-3 btn btn-sm  align-items-center bs-pass-para" data-bs-toggle="tooltip" title="{{__('Delete')}}" ><i class="ti ti-trash text-white"></i></a>
+                                            {!! Form::close() !!}
+                                        </div>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

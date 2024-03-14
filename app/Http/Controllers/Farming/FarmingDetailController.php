@@ -19,8 +19,8 @@ class FarmingDetailController extends Controller
     {
         
         $farming_details = FarmingDetail::query()->select('farming_details.*')
-                    ->join('users','users.id','farmings.created_by')
-                    ->where('farmings.created_by',Auth::user()->id)
+                    ->join('users','users.id','farming_details.created_by')
+                    ->where('farming_details.created_by',Auth::user()->id)
                     ->orWhere('users.supervisor_id',Auth::user()->id)->get();
         return view('farmer.farming_detail.index',compact('farming_details'));
     }

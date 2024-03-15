@@ -140,12 +140,31 @@
                 }
             });
         });
+       
+        $('#non_loan_type').on('change', function(event) {
+            var value = $(this).val();
+            if (value == "Bank") {
+                $('.coperative_fields').hide();
+                $('.bank_detail_fields').show();
+            } else {
+                $('.bank_detail_fields').hide();
+                $('.coperative_fields').show();
+            }
+        });
         $('input[type=radio][name="finance_category"]').on('change', function(event) {
             var value = $(this).val();
             if (value == "Loan") {
-                $('.bank_detail_fields').hide();
+                $('.finance_category_fields').hide();
             } else {
-                $('.bank_detail_fields').show();
+                $('.finance_category_fields').show();
+            }
+        });
+        $('input[type=radio][name="is_irregation"]').on('change', function(event) {
+            var value = $(this).val();
+            if (value == "1" || value == true) {
+                $('.irregation_fields').show();
+            } else {
+                $('.irregation_fields').hide();
             }
         });
     });
@@ -251,9 +270,35 @@
                             {{ Form::label('police_station', __('Police Station'),['class'=>'form-label']) }}
                             {{ Form::text('police_station', $farming->police_station, array('class' => 'form-control','required'=>'required')) }}
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('zone_id', __('Zone'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="zone_id" id="zone_id" required placeholder="Select Country">
+                                    <option value="">{{__('Select Zone')}}</option>
+                                    @foreach($zones as $zone)
+                                        <option {{$farming->zone_id == $zone->id ? 'selected' : '' }} value="{{ $zone->id }}">{{ $zone->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ Form::label('center_id', __('Center'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="center_id" id="center_id" placeholder="Select Center" required>
+                                    <option value="">{{__('Select Center')}}</option>
+                                    @foreach($centers as $center)
+                                        <option {{$farming->center_id == $center->id ? 'selected' : '' }} value="{{ $state->id }}">{{ $state->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group col-md-6">
                             {{ Form::label('registration_no', __('Registration No.'),['class'=>'form-label']) }}
                             {{ Form::text('registration_no', $farming->registration_no, array('class' => 'form-control','required'=>'required')) }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('g_code', __('Grovers Code / G. Code'),['class'=>'form-label']) }}
+                            {{ Form::text('g_code', $center->g_code, array('class' => 'form-control','required'=>'required')) }}
                         </div>
                         <div class="form-group col-md-6">
                             {{ Form::label('age', __('Age'),['class'=>'form-label']) }}
@@ -283,43 +328,8 @@
                             {{ Form::number('land_holding', $farming->land_holding, array('class' => 'form-control','step' => '0.01','required'=>'required')) }}
                         </div>
                         <div class="form-group col-md-6">
-                            {{ Form::label('language', __('Language'),['class'=>'form-label']) }}
-                            <br>
-                            <label><input type="radio" name="language" value="Hindi" {{$farming->language == 'Hindi' ? 'checked' :'' }}> Hindi</label>
-                            <label><input type="radio" name="language" value="English" {{$farming->language == 'English' ? 'checked' :'' }}> English</label>
-                            <label><input type="radio" name="language" value="Odia" {{$farming->language == 'Odia' ? 'checked' :'' }}> Odia</label>
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ Form::label('sms_mode', __('Sms Mode'),['class'=>'form-label']) }}
-                            <br>
-                            <label><input type="radio" name="sms_mode"  {{$farming->sms_mode == 'Text' ? 'checked' :'' }} value="Text" checked> Text</label>
-                            <label><input type="radio" name="sms_mode"  {{$farming->sms_mode == 'Voice' ? 'checked' :'' }} value="Voice"> Voice</label>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('zone_id', __('Zone'),['class'=>'form-label']) }}
-                                <select class="form-control select" name="zone_id" id="zone_id" required placeholder="Select Country">
-                                    <option value="">{{__('Select Zone')}}</option>
-                                    @foreach($zones as $zone)
-                                        <option {{$farming->zone_id == $zone->id ? 'selected' : '' }} value="{{ $zone->id }}">{{ $zone->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('center_id', __('Center'),['class'=>'form-label']) }}
-                                <select class="form-control select" name="center_id" id="center_id" placeholder="Select Center" required>
-                                    <option value="">{{__('Select Center')}}</option>
-                                    @foreach($centers as $center)
-                                        <option {{$farming->center_id == $center->id ? 'selected' : '' }} value="{{ $state->id }}">{{ $state->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            {{ Form::label('g_code', __('Grovers Code / G. Code'),['class'=>'form-label']) }}
-                            {{ Form::text('g_code', $center->g_code, array('class' => 'form-control','required'=>'required')) }}
+                            {{ Form::label('offered_area', __('Offered Area'),['class'=>'form-label']) }}
+                            {{ Form::text('offered_area',  $farming->offered_area, array('class' => 'form-control','required'=>'required')) }}
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -338,11 +348,21 @@
                             <label><input type="radio" name="finance_category" value="Loan" @if($farming->finance_category == 'Loan') checked @endif > Loan</label>
                             <label><input type="radio" name="finance_category" value="Non-loan" @if($farming->finance_category == 'Non-loan') checked @endif> Non-loan</label>
                         </div>
-                        <div class="form-group col-md-6 bank_detail_fields" @if($farming->finance_category == 'Loan') style="display:none;" @endif>
+                        <div class="col-md-6 finance_category_fields" @if($farming->finance_category == 'Loan') style="display:none;" @endif>
+                            <div class="form-group">
+                                {{ Form::label('non_loan_type', __('Non Loan Type'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="non_loan_type" id="non_loan_type" placeholder="Select Loan Type">
+                                    <option value="">{{__('Select')}}</option>
+                                    <option @if($farming->non_loan_type == "Bank") selected @endif value="Bank">Bank</option>
+                                    <option @if($farming->non_loan_type == "Co-Operative") selected @endif value="Co-Operative">Co-Operative</option>                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 bank_detail_fields" @if($farming->non_loan_type == 'Co-Operative') style="display:none;" @endif>
                             {{ Form::label('account_number', __('Account Number'),['class'=>'form-label']) }}
                             {{ Form::text('account_number', $farming->account_number, array('class' => 'form-control')) }}
                         </div>
-                        <div class="col-md-6 bank_detail_fields" @if($farming->finance_category == 'Loan') style="display:none;" @endif>
+                        <div class="col-md-6 bank_detail_fields" @if($farming->non_loan_type == 'Co-Operative') style="display:none;" @endif>
                             <div class="form-group">
                                 {{ Form::label('bank', __('Bank'),['class'=>'form-label']) }}
                                 <select class="form-control select" name="bank" id="bank" required placeholder="Select Country">
@@ -370,14 +390,58 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group col-md-6 bank_detail_fields" @if($farming->finance_category == 'Loan') style="display:none;" @endif>
+                        <div class="form-group col-md-6 bank_detail_fields" @if($farming->non_loan_type == 'Co-Operative') style="display:none;" @endif>
                             {{ Form::label('branch', __('Branch'),['class'=>'form-label']) }}
                             {{ Form::text('branch',  $farming->branch, array('class' => 'form-control')) }}
                         </div>
-                        <div class="form-group col-md-6 bank_detail_fields" @if($farming->finance_category == 'Loan') style="display:none;" @endif>
+                        <div class="form-group col-md-6 bank_detail_fields" @if($farming->non_loan_type == 'Co-Operative') style="display:none;" @endif>
                             {{ Form::label('ifsc_code', __('IFSC Code'),['class'=>'form-label']) }}
                             {{ Form::text('ifsc_code',  $farming->ifsc_code, array('class' => 'form-control')) }}
                         </div>
+                        <div class="form-group col-md-6 coperative_fields" @if($farming->non_loan_type == 'Bank') style="display:none;" @endif>
+                            {{ Form::label('name_of_cooperative', __('Co-Operative Name'),['class'=>'form-label']) }}
+                            {{ Form::text('name_of_cooperative', $farming->name_of_cooperative, array('class' => 'form-control')) }}
+                        </div>
+                        <div class="form-group col-md-6 coperative_fields" @if($farming->non_loan_type == 'Bank') style="display:none;" @endif>
+                            {{ Form::label('cooperative_address', __('Co-Operative Address'),['class'=>'form-label']) }}
+                            {{ Form::text('cooperative_address', $farming->cooperative_address, array('class' => 'form-control')) }}
+                        </div>
+                        <div class="form-group col-md-3">
+                          {{ Form::label('language', __('Language'),['class'=>'form-label']) }}
+                          <br>
+                          <label><input type="radio" name="language" value="Hindi" {{$farming->language =='Hindi' ? 'checked' : '' }}> Hindi</label>
+                          <label><input type="radio" name="language" value="English" {{$farming->language =='English' ? 'checked' : '' }}> English</label>
+                      </div>
+                      <div class="form-group col-md-3">
+                          {{ Form::label('sms_mode', __('Sms Mode'),['class'=>'form-label']) }}
+                          <br>
+                          <label><input type="radio" name="sms_mode" value="Text" {{$farming->sms_mode =='Text' ? 'checked' : '' }}> Text</label>
+                          <label><input type="radio" name="sms_mode" value="Voice" {{$farming->sms_mode =='Voice' ? 'checked' : '' }}> Voice</label>
+                      </div>
+                      <div class="form-group col-md-3">
+                          {{ Form::label('land_type', __('Land Type'),['class'=>'form-label']) }}
+                          <br>
+                          <label><input type="radio" name="land_type" value="Leased Land" {{$farming->land_type =='Leased Land' ? 'checked' : '' }}> Leased Land</label>
+                          <label><input type="radio" name="land_type" value="Owned Land" {{$farming->land_type =='Owned Land' ? 'checked' : '' }}> Owned Land</label>
+                      </div>
+                      <div class="form-group col-md-3">
+                          {{ Form::label('is_irregation', __('Is irregation Available'),['class'=>'form-label']) }}
+                          <br>
+                          <label><input type="radio" name="is_irregation" value="1" {{$farming->is_irregation ? 'checked' : '' }} > Yes</label>
+                          <label><input type="radio" name="is_irregation" value="0" {{!$farming->is_irregation ? 'checked' : '' }}> No</label>
+                      </div>
+                      <div class="form-group col-md-4 irregation_fields" @if(!$farming->is_irregation) style="display:none;" @endif>
+                          {{ Form::label('irregation', __('Irregation'),['class'=>'form-label']) }}
+                          <select class="form-control select" name="irregation" id="irregation" placeholder="Select Seed Category">
+                              <option value="">{{__('Select Irregation')}}</option>
+                              <option {{$farming->irregation == "Wells" ? 'selected' : ''}} value="Wells">Wells</option>
+                              <option {{$farming->irregation == "Tube Wells" ? 'selected' : ''}} value="Tube Wells">Tube Wells</option>
+                              <option {{$farming->irregation == "Lakes" ? 'selected' : ''}} value="Lakes">Lakes</option>
+                              <option {{$farming->irregation == "Ponds" ? 'selected' : ''}} value="Ponds">Ponds</option>
+                              <option {{$farming->irregation == "Rivers" ? 'selected' : ''}} value="Rivers">Rivers</option>
+                              <option {{$farming->irregation == "Dams and Canals" ? 'selected' : ''}} value="Dams and Canals">Dams and Canals</option>
+                          </select>
+                      </div>
                     </div>
                 </div>
             </div>

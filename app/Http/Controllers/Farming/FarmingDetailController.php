@@ -45,7 +45,6 @@ class FarmingDetailController extends Controller
     {
         try{
             $this->validate($request,[
-                'name' => 'required',
                 'farming_id' => 'required',
                 'plot_number' => 'required',
                 'kata_number' => 'required',
@@ -94,7 +93,6 @@ class FarmingDetailController extends Controller
         $farming_detail = FarmingDetail::find($id);
         try{
             $this->validate($request,[
-                'name' => 'required',
                 'farming_id' => 'required',
                 'plot_number' => 'required',
                 'kata_number' => 'required',
@@ -120,5 +118,37 @@ class FarmingDetailController extends Controller
         $farmingDetail = FarmingDetail::find($id);
         $farmingDetail->delete();
         return redirect()->back()->with('success', 'Farming Detail Deleted Successfully.');
+    }
+    public function getFarmingDetail(Request $request)
+    {
+        $farming = Farming::find($request->farming_id);
+        $blockHtml = $gpHtml = $villageHtml = $zoneHtml = $centerHtml = '';
+        if($farming->block)
+        {
+            $blockHtml = '<option value="'.$farming->block->id.'"selected>'.$farming->block->name.'</option>';
+        }
+        if($farming->gram_panchyat)
+        {
+            $gpHtml = '<option value="'.$farming->gram_panchyat->id.'"selected>'.$farming->gram_panchyat->name.'</option>';
+        }
+        if($farming->village)
+        {
+            $villageHtml = '<option value="'.$farming->village->id.'"selected>'.$farming->village->name.'</option>';
+        }
+        if($farming->zone)
+        {
+            $zoneHtml = '<option value="'.$farming->zone->id.'"selected>'.$farming->zone->name.'</option>';
+        }
+        if($farming->center)
+        {
+            $centerHtml = '<option value="'.$farming->center->id.'" selected>'.$farming->center->name.'</option>';
+        }
+        return response()->json([
+            'blockHtml' => $blockHtml,
+            'gpHtml' => $gpHtml,
+            'villageHtml' => $villageHtml,
+            'zoneHtml' => $zoneHtml,
+            'centerHtml' => $centerHtml,
+        ]);
     }
 }

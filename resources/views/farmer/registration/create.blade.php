@@ -140,12 +140,30 @@
                 }
             });
         });
+        $('#non_loan_type').on('change', function(event) {
+            var value = $(this).val();
+            if (value == "Bank") {
+                $('.coperative_fields').hide();
+                $('.bank_detail_fields').show();
+            } else {
+                $('.bank_detail_fields').hide();
+                $('.coperative_fields').show();
+            }
+        });
         $('input[type=radio][name="finance_category"]').on('change', function(event) {
             var value = $(this).val();
             if (value == "Loan") {
-                $('.bank_detail_fields').hide();
+                $('.finance_category_fields').hide();
             } else {
-                $('.bank_detail_fields').show();
+                $('.finance_category_fields').show();
+            }
+        });
+        $('input[type=radio][name="is_irregation"]').on('change', function(event) {
+            var value = $(this).val();
+            if (value == "1" || value == true) {
+                $('.irregation_fields').show();
+            } else {
+                $('.irregation_fields').hide();
             }
         });
     });
@@ -291,6 +309,10 @@
                             {{ Form::label('land_holding', __('Land Holding (In Acre)'),['class'=>'form-label']) }}
                             {{ Form::number('land_holding', '', array('class' => 'form-control','step' => '0.01','required'=>'required')) }}
                         </div>
+                        <div class="form-group col-md-6">
+                            {{ Form::label('offered_area', __('Offered Area'),['class'=>'form-label']) }}
+                            {{ Form::text('offered_area', '', array('class' => 'form-control','required'=>'required')) }}
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ Form::label('seed_category_id', __('Seed Category'),['class'=>'form-label']) }}
@@ -308,6 +330,16 @@
                             <br>
                             <label><input type="radio" name="finance_category" value="Loan" checked> Loan</label>
                             <label><input type="radio" name="finance_category" value="Non-loan"> Non-loan</label>
+                        </div>
+                        <div class="col-md-6 finance_category_fields" style="display:none;">
+                            <div class="form-group">
+                                {{ Form::label('non_loan_type', __('Non Loan Type'),['class'=>'form-label']) }}
+                                <select class="form-control select" name="non_loan_type" id="non_loan_type" placeholder="Select Loan Type">
+                                    <option value="">{{__('Select')}}</option>
+                                    <option value="Bank">Bank</option>
+                                    <option value="Co-Operative">Co-Operative</option>                    
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group col-md-6 bank_detail_fields" style="display:none;">
                             {{ Form::label('account_number', __('Account Number'),['class'=>'form-label']) }}
@@ -348,6 +380,14 @@
                             {{ Form::label('ifsc_code', __('IFSC Code'),['class'=>'form-label']) }}
                             {{ Form::text('ifsc_code', '', array('class' => 'form-control')) }}
                         </div>
+                        <div class="form-group col-md-6 coperative_fields" style="display:none;">
+                            {{ Form::label('name_of_cooperative', __('Co-Operative Name'),['class'=>'form-label']) }}
+                            {{ Form::text('name_of_cooperative', '', array('class' => 'form-control')) }}
+                        </div>
+                        <div class="form-group col-md-6 coperative_fields" style="display:none;">
+                            {{ Form::label('cooperative_address', __('Co-Operative Address'),['class'=>'form-label']) }}
+                            {{ Form::text('cooperative_address', '', array('class' => 'form-control')) }}
+                        </div>
                           <div class="form-group col-md-3">
                             {{ Form::label('language', __('Language'),['class'=>'form-label']) }}
                             <br>
@@ -359,6 +399,30 @@
                             <br>
                             <label><input type="radio" name="sms_mode" value="Text" checked> Text</label>
                             <label><input type="radio" name="sms_mode" value="Voice"> Voice</label>
+                        </div>
+                        <div class="form-group col-md-3">
+                            {{ Form::label('land_type', __('Land Type'),['class'=>'form-label']) }}
+                            <br>
+                            <label><input type="radio" name="land_type" value="Leased Land" checked> Leased Land</label>
+                            <label><input type="radio" name="land_type" value="Owned Land"> Owned Land</label>
+                        </div>
+                        <div class="form-group col-md-3">
+                            {{ Form::label('is_irregation', __('Is irregation Available'),['class'=>'form-label']) }}
+                            <br>
+                            <label><input type="radio" name="is_irregation" value="1" > Yes</label>
+                            <label><input type="radio" name="is_irregation" value="0" checked> No</label>
+                        </div>
+                        <div class="form-group col-md-4 irregation_fields" style="display:none;">
+                            {{ Form::label('irregation', __('Irregation'),['class'=>'form-label']) }}
+                            <select class="form-control select" name="irregation" id="irregation" placeholder="Select Seed Category">
+                                <option value="">{{__('Select Irregation')}}</option>
+                                <option value="Wells">Wells</option>
+                                <option value="Tube Wells">Tube Wells</option>
+                                <option value="Lakes">Lakes</option>
+                                <option value="Ponds">Ponds</option>
+                                <option value="Rivers">Rivers</option>
+                                <option value="Dams and Canals">Dams and Canals</option>
+                            </select>
                         </div>
                     </div>
                 </div>

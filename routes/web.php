@@ -1591,7 +1591,8 @@ Route::group(
         Route::resource('loan',FarmerLoanController::class);   
         Route::get('reimbursement/create',[FarmingPaymentController::class,'reimbursementCreate'])->name('reimbursement.create');   
         Route::get('reimbursement',[FarmingPaymentController::class,'reimbursement'])->name('reimbursement.index');   
-        Route::resource('seed_category',SeedCategoryController::class);   
+        Route::resource('seed_category',SeedCategoryController::class); 
+        Route::post('get_detail',[FarmingDetailController::class,'getFarmingDetail'])->name('farming.get_detail');     
         Route::resource('farming_detail',FarmingDetailController::class);   
     }
 );

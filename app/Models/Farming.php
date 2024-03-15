@@ -41,6 +41,14 @@ class Farming extends Model
         'bank',
         'branch',
         'ifsc_code',
+        'land_type',
+        'offered_area',
+        'is_irregation',
+        'irregation',
+        'non_loan_type',
+        'account_no_ifsc',
+        'name_of_cooperative',
+        'cooperative_address',
     ];
 
     public function country()

@@ -297,10 +297,6 @@
                             {{ Form::text('registration_no', $farming->registration_no, array('class' => 'form-control','required'=>'required')) }}
                         </div>
                         <div class="form-group col-md-6">
-                            {{ Form::label('g_code', __('Grovers Code / G. Code'),['class'=>'form-label']) }}
-                            {{ Form::text('g_code', $center->g_code, array('class' => 'form-control','required'=>'required')) }}
-                        </div>
-                        <div class="form-group col-md-6">
                             {{ Form::label('age', __('Age'),['class'=>'form-label']) }}
                             {{ Form::number('age', $farming->age, array('class' => 'form-control','required'=>'required')) }}
                         </div>

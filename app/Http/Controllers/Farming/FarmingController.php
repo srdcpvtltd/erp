@@ -73,7 +73,7 @@ class FarmingController extends Controller
             ]);
             $zone = Zone::find($request->zone_id);
             $center = Center::find($request->center_id);
-            $existingFarmingProfiles = Farming::where('zone_id',$zone->id)->count() + 1;
+            $existingFarmingProfiles = Farming::where('center_id',$center->id)->count() + 1;
             $request->merge([
                 'g_code' => @$zone->zone_number.'/'.@$center->center_number.'/000'.$existingFarmingProfiles
             ]);
@@ -139,7 +139,7 @@ class FarmingController extends Controller
         {
             $zone = Zone::find($request->zone_id);
             $center = Center::find($request->center_id);
-            $existingFarmingProfiles = Farming::where('zone_id',$zone->id)->count() + 1;
+            $existingFarmingProfiles = Farming::where('center_id',$center->id)->count() + 1;
             $request->merge([
                 'g_code' => $zone->zone_number.'/'.$center->center_number.'/000'.$existingFarmingProfiles
             ]);
@@ -148,7 +148,7 @@ class FarmingController extends Controller
         {
             $zone = Zone::find($request->zone_id);
             $center = Center::find($request->center_id);
-            $existingFarmingProfiles = Farming::where('zone_id',$zone->id)->count() + 1;
+            $existingFarmingProfiles = Farming::where('center_id',$center->id)->count() + 1;
             $request->merge([
                 'g_code' => $zone->zone_number.'/'.$center->center_number.'/000'.$existingFarmingProfiles
             ]);

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AllowanceController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\FarmingController;
+use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\SalaryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('add-tracker', [ApiController::class, 'addTracker']);
     Route::post('stop-tracker', [ApiController::class, 'stopTracker']);
     Route::post('upload-photos', [ApiController::class, 'uploadImage']);
+    Route::get('get-user-permissions',[PermissionController::class,'getUserPermissions']);
     // Location Apis
     Route::get('countries',[FarmingController::class,'getCountries']);
     Route::post('get_states',[FarmingController::class,'getStates']);

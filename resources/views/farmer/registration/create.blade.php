@@ -309,17 +309,6 @@
                             {{ Form::label('offered_area', __('Offered Area'),['class'=>'form-label']) }}
                             {{ Form::text('offered_area', '', array('class' => 'form-control','required'=>'required')) }}
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ Form::label('seed_category_id', __('Seed Category'),['class'=>'form-label']) }}
-                                <select class="form-control select" name="seed_category_id" id="seed_category_id" required placeholder="Select Seed Category">
-                                    <option value="">{{__('Select Seed Category')}}</option>
-                                    @foreach($seed_categories as $seed_category)
-                                        <option value="{{ $seed_category->id }}">{{ $seed_category->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
 
                         <div class="form-group col-md-6">
                             {{ Form::label('finance_category', __('Finance Category'),['class'=>'form-label']) }}

@@ -400,7 +400,7 @@
                         <div class="form-group col-md-4 irregation_fields" style="display:none;">
                             {{ Form::label('irregation', __('Irregation'),['class'=>'form-label']) }}
                             <select class="form-control select" name="irregation" id="irregation" placeholder="Select Seed Category">
-                                <option value="">{{__('Select Irregation')}}</option>
+                                <option value="">{{__('Mode of Irregation')}}</option>
                                 <option value="Wells">Wells</option>
                                 <option value="Tube Wells">Tube Wells</option>
                                 <option value="Lakes">Lakes</option>
